@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-  <!-- 240716 공통된 javascript 파일 분리 -->
-  <!-- <div th:replace="scripts/scripts::scripts"></div> -->
-  
   <th:block th:fragment="scripts">
+    <!-- 240718 공통된 javascript 파일 분리 -->
+    <!-- <div th:replace="~{scripts/scripts::scripts}"></div> -->
+  
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="/bootstrap/vendors/popper/popper.min.js"></script>
-    <script src="/bootstrap/vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="/bootstrap/vendors/is/is.min.js"></script>
-    <script src="/bootstrap/vendors/countup/countUp.umd.js"></script>
-    <script src="/bootstrap/vendors/swiper/swiper-bundle.min.js"></script>
-    <script src="/bootstrap/vendors/lodash/lodash.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="/bootstrap/vendors/list.js/list.min.js"></script>
-    <script src="/bootstrap/assets/js/theme.js"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+  
   </th:block>
+
+
+
 </html>
