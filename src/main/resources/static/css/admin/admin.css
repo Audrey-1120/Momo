@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+/* 상단 선택삭제 버튼 */
+#select-delete-btn {
+  border: none;
+  margin-right: 0.5rem;
+  background-color: #f4f6f8;
+}
+
+/* 활동중지 버튼 */
+.btn-inactive {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+/* 전송 버튼 */
+.btn-send {
+  margin-right: 0.5rem;
+  float: right;
+}
+
+/* 취소 버튼 */
+.btn-dismiss {
+  float: right;
+}
