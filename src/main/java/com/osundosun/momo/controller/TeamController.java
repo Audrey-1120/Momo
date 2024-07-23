@@ -16,4 +16,9 @@ public class TeamController {
     return "meetingOwner/createMeeting";
   }
 
+  @GetMapping("/myMeetingDetail.page")
+  public String  myMeetingDetail() {
+    return "meetingOwner/myMeetingDetail";
+  }
+ 
 }
