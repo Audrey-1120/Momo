@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+	<!-- <head>태그 내 공통된 stylesheets 분리 -->
+    <head th:replace="~{/stylesheets/head :: head (title='관리자')}"></head>
+    
+   	<!-- css 파일 적용 -->
+	<link href="css/admin/admin.css" rel="stylesheet">
+    
+  <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top">
+            <div class="container topbar bg-primary d-none d-lg-block">
+                <div class="d-flex justify-content-between">
+                    <div class="top-info ps-2">
+                      <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">서울시 중랑구 여월동 56-1</a></small>
+                      <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Momo@momoclub.com</a></small>
+                    </div>
+                    <div class="top-link pe-2">
+                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                    </div>
+                </div>
+            </div>
+            <div class="container px-0">
+                <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                    <a href="/index.html" class="navbar-brand"><img src="img/momo-logo2.png" style="width: 130px; height: 70px;"></a>
+                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto">
+                            <a href="/adminUser.page" class="nav-item nav-link">사용자 관리</a>
+                            <a href="/adminReport.page" class="nav-item nav-link">신고관리</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">모임&카테고리 관리</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="/adminMeet.page" class="dropdown-item">모임 관리</a>
+                                    <a href="/adminCategory.page" class="dropdown-item">카테고리&태그 수정</a>
+                                </div>
+                            </div>
+                            <a href="shop-detail.html" class="nav-item nav-link">문의 관리</a>
+                        </div>
+                        <div class="d-flex m-3 me-0">
+                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <a href="#" class="position-relative me-4 my-auto">
+                                <i class="fa fa-bell fa-2x"></i>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                            </a>
+                            <a href="#" class="my-auto">
+                                <i class="fas fa-user fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">관리자 페이지</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#" style="color: white;">홈</a></li>
+                <li class="breadcrumb-item"><a href="#" style="color: white;">Pages</a></li>
+                <li class="breadcrumb-item active text-white">로그인</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+
+        <!-- Checkout Page Start -->
+        <div class="container-fluid py-5">
+            <div class="container-fluid py-5 px-5">
+                <h1>모임 관리</h1>
+                <form action="#">
+                    <div class="row g-5">
+                        <div class="col-md-12 col-lg-6 col-xl-8" style="font-size: 14px;">
+	                	  <div class="d-flex justify-content-end">
+	                	    <button id="select-delete-btn">선택삭제</button>
+	                        <select id="meetings" name="meetinglist" class="border-0 form-select-sm bg-light" form="meetingform" style="margin-right: 0.5rem;">
+                              <option value="volvo">카테고리순</option>
+                              <option value="saab">모집중</option>
+                              <option value="opel">모집완료</option>
+                              <option value="audi">모임번호순</option>
+	                        </select>
+	                        <div class="input-group" style="width: auto;">
+                              <input type="search" class="border-0 form-select-sm bg-light" placeholder="검색어를 입력해주세요" aria-describedby="search-icon-1">
+                              <span id="search-icon-1" class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+	                      </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">모임번호</th>
+                                            <th scope="col">모임명</th>
+                                            <th scope="col">분류</th>
+                                            <th scope="col">참여인원수</th>
+                                            <th scope="col">대기인원</th>
+                                            <th scope="col">생성일</th>
+                                            <th scope="col">기타</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+                                            <td>0</td>
+                                            <td>공포매니아</td>
+                                            <td>영화/공포</td>
+                                            <td><span class="headCount">3</span>/5</td>
+                                            <td>-</td>
+                                            <td>2024.07.10 오전 10:00</td>
+                                            <td>문의 많음..</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-2" name="Accounts" value="Accounts"></td>
+                                            <td>1</td>
+                                            <td>등좋모</td>
+                                            <td>스포츠/등산</td>
+                                            <td><span class="headCount">7</span>/10</td>
+                                            <td>-</td>
+                                            <td>2024.07.02 오후 11:45</td>
+                                            <td>잦은 신고 접수 발생</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-3" name="Accounts" value="Accounts"></td>
+                                            <td>2</td>
+                                            <td>셜록흠즈</td>
+                                            <td>독서/추리</td>
+                                            <td><span class="headCount">5/5</span></td>
+                                            <td>2</td>
+                                            <td>2024.07.03 오전 07:20</td>
+                                            <td>대기자 수 많음</td>
+                                        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-4" name="Accounts" value="Accounts"></td>
+								            <td>3</td>
+								            <td>클래식천국</td>
+								            <td>음악/클래식</td>
+								            <td><span class="headCount">2</span>/6</td>
+								            <td>-</td>
+								            <td>2024.04.10 오후 16:00</td>
+								            <td>탈퇴자 다수 발생</td>
+								        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-5" name="Accounts" value="Accounts"></td>
+								            <td>4</td>
+								            <td>로맨티스트</td>
+								            <td>영화/로맨스</td>
+								            <td><span class="headCount">1</span>/5</td>
+								            <td>-</td>
+								            <td>2024.07.01 오전 08:03</td>
+								            <td>정상</td>
+								        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-6" name="Accounts" value="Accounts"></td>
+                                            <td>5</td>
+                                            <td>공포매니아</td>
+                                            <td>영화/공포</td>
+                                            <td><span class="headCount">3</span>/5</td>
+                                            <td>-</td>
+                                            <td>2024.07.10 오전 10:00</td>
+                                            <td>문의 많음..</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-7" name="Accounts" value="Accounts"></td>
+                                            <td>6</td>
+                                            <td>등좋모</td>
+                                            <td>스포츠/등산</td>
+                                            <td><span class="headCount">7</span>/10</td>
+                                            <td>-</td>
+                                            <td>2024.07.02 오후 11:45</td>
+                                            <td>잦은 신고 접수 발생</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-8" name="Accounts" value="Accounts"></td>
+                                            <td>7</td>
+                                            <td>셜록흠즈</td>
+                                            <td>독서/추리</td>
+                                            <td><span class="headCount">5/5</span></td>
+                                            <td>2</td>
+                                            <td>2024.07.03 오전 07:20</td>
+                                            <td>대기자 수 많음</td>
+                                        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-9" name="Accounts" value="Accounts"></td>
+								            <td>8</td>
+								            <td>클래식천국</td>
+								            <td>음악/클래식</td>
+								            <td><span class="headCount">2</span>/6</td>
+								            <td>-</td>
+								            <td>2024.04.10 오후 16:00</td>
+								            <td>탈퇴자 다수 발생</td>
+								        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-10" name="Accounts" value="Accounts"></td>
+								            <td>9</td>
+								            <td>로맨티스트</td>
+								            <td>영화/로맨스</td>
+								            <td><span class="headCount">1</span>/5</td>
+								            <td>-</td>
+								            <td>2024.07.01 오전 08:03</td>
+								            <td>정상</td>
+								        </tr>
+								        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-11" name="Accounts" value="Accounts"></td>
+                                            <td>10</td>
+                                            <td>공포매니아</td>
+                                            <td>영화/공포</td>
+                                            <td><span class="headCount">3</span>/5</td>
+                                            <td>-</td>
+                                            <td>2024.07.10 오전 10:00</td>
+                                            <td>문의 많음..</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-12" name="Accounts" value="Accounts"></td>
+                                            <td>11</td>
+                                            <td>등좋모</td>
+                                            <td>스포츠/등산</td>
+                                            <td><span class="headCount">7</span>/10</td>
+                                            <td>-</td>
+                                            <td>2024.07.02 오후 11:45</td>
+                                            <td>잦은 신고 접수 발생</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-13" name="Accounts" value="Accounts"></td>
+                                            <td>12</td>
+                                            <td>셜록흠즈</td>
+                                            <td>독서/추리</td>
+                                            <td><span class="headCount">5/5</span></td>
+                                            <td>2</td>
+                                            <td>2024.07.03 오전 07:20</td>
+                                            <td>대기자 수 많음</td>
+                                        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-14" name="Accounts" value="Accounts"></td>
+								            <td>13</td>
+								            <td>클래식천국</td>
+								            <td>음악/클래식</td>
+								            <td><span class="headCount">2</span>/6</td>
+								            <td>-</td>
+								            <td>2024.04.10 오후 16:00</td>
+								            <td>탈퇴자 다수 발생</td>
+								        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-15" name="Accounts" value="Accounts"></td>
+								            <td>14</td>
+								            <td>로맨티스트</td>
+								            <td>영화/로맨스</td>
+								            <td><span class="headCount">1</span>/5</td>
+								            <td>-</td>
+								            <td>2024.07.01 오전 08:03</td>
+								            <td>정상</td>
+								        </tr>
+								        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-16" name="Accounts" value="Accounts"></td>
+                                            <td>15</td>
+                                            <td>공포매니아</td>
+                                            <td>영화/공포</td>
+                                            <td><span class="headCount">3</span>/5</td>
+                                            <td>-</td>
+                                            <td>2024.07.10 오전 10:00</td>
+                                            <td>문의 많음..</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-17" name="Accounts" value="Accounts"></td>
+                                            <td>16</td>
+                                            <td>등좋모</td>
+                                            <td>스포츠/등산</td>
+                                            <td><span class="headCount">7</span>/10</td>
+                                            <td>-</td>
+                                            <td>2024.07.02 오후 11:45</td>
+                                            <td>잦은 신고 접수 발생</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-18" name="Accounts" value="Accounts"></td>
+                                            <td>17</td>
+                                            <td>셜록흠즈</td>
+                                            <td>독서/추리</td>
+                                            <td><span class="headCount">5/5</span></td>
+                                            <td>2</td>
+                                            <td>2024.07.03 오전 07:20</td>
+                                            <td>대기자 수 많음</td>
+                                        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-19" name="Accounts" value="Accounts"></td>
+								            <td>18</td>
+								            <td>클래식천국</td>
+								            <td>음악/클래식</td>
+								            <td><span class="headCount">2</span>/6</td>
+								            <td>-</td>
+								            <td>2024.04.10 오후 16:00</td>
+								            <td>탈퇴자 다수 발생</td>
+								        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-20" name="Accounts" value="Accounts"></td>
+								            <td>19</td>
+								            <td>로맨티스트</td>
+								            <td>영화/로맨스</td>
+								            <td><span class="headCount">1</span>/5</td>
+								            <td>-</td>
+								            <td>2024.07.01 오전 08:03</td>
+								            <td>정상</td>
+								        </tr>
+								        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-21" name="Accounts" value="Accounts"></td>
+                                            <td>20</td>
+                                            <td>공포매니아</td>
+                                            <td>영화/공포</td>
+                                            <td><span class="headCount">3</span>/5</td>
+                                            <td>-</td>
+                                            <td>2024.07.10 오전 10:00</td>
+                                            <td>문의 많음..</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-22" name="Accounts" value="Accounts"></td>
+                                            <td>21</td>
+                                            <td>등좋모</td>
+                                            <td>스포츠/등산</td>
+                                            <td><span class="headCount">7</span>/10</td>
+                                            <td>-</td>
+                                            <td>2024.07.02 오후 11:45</td>
+                                            <td>잦은 신고 접수 발생</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-23" name="Accounts" value="Accounts"></td>
+                                            <td>22</td>
+                                            <td>셜록흠즈</td>
+                                            <td>독서/추리</td>
+                                            <td><span class="headCount">5/5</span></td>
+                                            <td>2</td>
+                                            <td>2024.07.03 오전 07:20</td>
+                                            <td>대기자 수 많음</td>
+                                        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-24" name="Accounts" value="Accounts"></td>
+								            <td>23</td>
+								            <td>클래식천국</td>
+								            <td>음악/클래식</td>
+								            <td><span class="headCount">2</span>/6</td>
+								            <td>-</td>
+								            <td>2024.04.10 오후 16:00</td>
+								            <td>탈퇴자 다수 발생</td>
+								        </tr>
+								        <tr>
+								            <td><input type="checkbox" class="form-check-input" id="Account-25" name="Accounts" value="Accounts"></td>
+								            <td>24</td>
+								            <td>로맨티스트</td>
+								            <td>영화/로맨스</td>
+								            <td><span class="headCount">1</span>/5</td>
+								            <td>-</td>
+								            <td>2024.07.01 오전 08:03</td>
+								            <td>정상</td>
+								        </tr>
+								        <tr>
+                                       	<td><input type="checkbox" class="form-check-input" id="Account-26" name="Accounts" value="Accounts"></td>
+                                            <td>25</td>
+                                            <td>공포매니아</td>
+                                            <td>영화/공포</td>
+                                            <td><span class="headCount">3</span>/5</td>
+                                            <td>-</td>
+                                            <td>2024.07.10 오전 10:00</td>
+                                            <td>문의 많음..</td>
+                                        </tr>
+                                        <tr>
+                                        	<td><input type="checkbox" class="form-check-input" id="Account-27" name="Accounts" value="Accounts"></td>
+                                            <td>26</td>
+                                            <td>등좋모</td>
+                                            <td>스포츠/등산</td>
+                                            <td><span class="headCount">7</span>/10</td>
+                                            <td>-</td>
+                                            <td>2024.07.02 오후 11:45</td>
+                                            <td>잦은 신고 접수 발생</td>
+                                        </tr>								        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12">
+                              <div class="pagination d-flex justify-content-center mt-5">
+                                <a href="#" class="rounded">«</a>
+                                <a href="#" class="active rounded">1</a>
+                                <a href="#" class="rounded">2</a>
+                                <a href="#" class="rounded">3</a>
+                                <a href="#" class="rounded">4</a>
+                                <a href="#" class="rounded">5</a>
+                                <a href="#" class="rounded">6</a>
+                                <a href="#" class="rounded">»</a>
+                              </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-xl-4">
+                        	<h3>상세보기</h3>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">모임번호</label>
+                                        <input type="text" class="form-control" value="C0002" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">모임명</label>
+                                <input type="text" class="form-control" value="등좋모">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">분류</label>
+                                <input type="text" class="form-control" value="스포츠/등산">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">상태</label>
+                                <input type="text" class="form-control" value="모집중">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">참여인원수</label>
+                                <input type="text" class="form-control" value="7/10">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">팀장</label>
+	                            <select id="leaders" name="leaderlist" class="border-0 form-select-sm" form="leaderform" style="margin-right: 0.5rem;" disabled>
+	                              <option value="volvo">Co1919</option>
+	                              <option value="saab">가111</option>
+	                              <option value="opel">나222</option>
+	                              <option value="audi">다333</option>
+	                              <option value="audi">라444</option>
+		                        </select>
+                                <button type="button" class="btn border-secondary btn-send">변경</button>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">기타</label>
+                                <input type="tel" class="form-control" value="잦은 신고 접수 발생. 주의 요망">
+                            </div>
+                            <div class="form-item">
+                            	<label class="form-label my-3">알림 발송</label>
+                            	<button type="button" class="btn border-secondary btn-send">전송하기</button>
+                                <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="알림 내용을 입력해주세요">
+                                </textarea>
+                            </div>
+                            <div class="form-item">
+                            	<button type="button" class="btn border-secondary mt-2 btn-inactive">모임 삭제</button>
+                            	<button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
+                                <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">수정</button>
+                            </div>
+                        </div>                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Checkout Page End -->
+
+		<!-- footer 분리 -->
+		<footer th:replace="~{/layout/footer::footer}"></footer>
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        <!-- 공통된 javascript 파일 분리 -->
+		<div th:replace="~{/scripts/scripts::scripts}"></div>
+
+</body>
+
+	<script>
+	  const pageHeader = $('.page-header');
+	  pageHeader.css('backgroundImage', 'none');
+	  pageHeader.css('background-color', '#81C408');
+	</script>
+
+</html>

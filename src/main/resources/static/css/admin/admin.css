@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* --------- adminUser --------- */
+
 /* 상단 선택삭제 버튼 */
 #select-delete-btn {
   border: none;
@@ -14,8 +16,8 @@
   border: none;
 }
 
-/* 전송 버튼 */
-.btn-send {
+/* 수정 버튼 */
+.btn-modify {
   margin-right: 0.5rem;
   float: right;
 }
@@ -24,3 +26,30 @@
 .btn-dismiss {
   float: right;
 }
+
+/* 전송하기 버튼 - 알림 발송 */
+.btn-send {
+  font-size: 13px;
+  padding: revert;
+}
+
+/* --------- adminMeet --------- */
+/* 참여인원수 */
+.headCount {
+  color: #F18D00;
+}
+
+
+/* --------- adminCategory --------- */
+.sub-categories {
+  margin-left: 20px;
+}
+
+.sub-categories li {
+  display: none;
+}
+
+.sub-categories.active {
+  display: block;
+}		
+
