@@ -25,9 +25,10 @@
     margin-left : 25px;
   }
   #profile-photo {
-    width: 5cm;
+    width: 4.5cm;
     height: 5cm;
-    background-color: grey;
+    background-color: lightgrey;
+    border-radius: 10px;
     margin-right: 20px;
     }
     
@@ -70,12 +71,14 @@
    li {
     margin: 5px;
     padding: 10px; 
-    border: 2px solid black; 
+    border: 0px; 
     border-radius: 10px;
     display: inline-block;
     background-color: gray;
     color:white;
   }
+  
+
   
   </style>
 
@@ -153,15 +156,15 @@
            <form action="">
            <div id="whole-wrapper">
            <div id="first-wrapper">
-           <div id="phto-name-wrapper">
+           <div id="phto-name-wrapper" class="d-flex align-items-end">
            <div id="profile-photo"></div>  
-           <input class="form-control" id="name" placeholder="모임 이름을 만들어보세요!">
+           <input class="form-control" id="name" placeholder="모임 이름을 만들어보세요!" style="height:36px; width:260px;">
            </div>
            
            
            <div id="cate">
            <input type="text" id="cate-text" class="form-control" placeholder="모임의 카테고리를 설정해주세요!">
-           <table id="cate-table" class="table">
+           <table id="cate-table" class="table" style="height:250px;">
 			    <thead>
 			        <tr>
 			            <th>대분류</th>
@@ -182,9 +185,9 @@
           
           
          <div id="second-wrapper">
-         <div id="point">
-         <button class="btn btn-light">선택</button>
-         <div class="form-control" id="personal-point" placeholder="어떤 사람을 선호하나요?">
+         <div id="point" class="mb-5">
+         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3">고르기</button>
+         <div class="form-control my-2" id="personal-point" placeholder="어떤 사람을 선호하나요?">
 
 
               <ul>
@@ -196,8 +199,9 @@
               </ul>
 
             </div> 
-         <button class="btn btn-light">선택</button>
-         <div class="form-control" id="team-point" placeholder="이 모임은 어떤 특성을 가지고 있나요?"></div>
+         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3 mt-4">고르기</button>
+         
+         <div class="form-control my-2" id="team-point" placeholder="이 모임은 어떤 특성을 가지고 있나요?">
           <ul>
                 <li>말없어요</a></li>
                 <li>INSP</a></li>
@@ -205,18 +209,21 @@
                 <li>커피 좋아요</a></li>
                 <li>술 안마셔요</a></li>
               </ul>
+              </div>
          </div> 
+         
          <div id="locaton-pay">
-          <input type="text" id="locate" class="form-control" placeholder="모임에 비용이 필요한가요?">
+          <input type="text" id="locate" class="form-control mb-2" placeholder="모임에 비용이 필요한가요?">
           <input type="text" id="pay" class="form-control" placeholder="어디에서 만나나요?">
          </div>
-     
-         <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-160">모임 생성</button>
-          </div>    
+         
+          <button class="btn form-control border-secondary py-3 bg-white text-primary " type="submit">모임생성</button>  
+          </div>
          </div>
               
          </form>        
               </div>
+             
         
 
         <!-- 본문 종료 -->
