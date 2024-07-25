@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"	  
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- <head>태그 내 공통된 stylesheets 분리 -->
+    <head th:replace="~{stylesheets/head :: head (title='Momo, 새로운 즐거움의 시작')}"></head>
+
+    <body>
+    
+  <style>
+    
+  #whole-wrapper {
+   display: flex;
+   justify-content: center;
+  }
+  
+  #first-wrapper {
+   width:700px;
+   margin-right : 25px;
+  }
+  
+  #second-wrapper {
+   width:700px;
+    margin-left : 25px;
+  }
+  #profile-photo {
+    width: 4.5cm;
+    height: 5cm;
+    background-color: lightgrey;
+    border-radius: 10px;
+    margin-right: 20px;
+    }
+    
+    
+  #phto-name-wrapper {
+  display:flex;
+  width: 600px;
+  }  
+  
+  #cate {
+  width : 600px;
+  height : 300px;
+  }
+  
+  #cate-text {
+  margin-top:20px;
+  margin-bottom: 20px;
+  }
+  
+   #cate-table {
+  height : 300px;
+  }
+  
+  #point{
+   width : 600px;
+  height : 300px;
+  }
+  
+  #point > div {
+   width : 600px;
+  height : 100px;
+  }
+  
+   ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+
+   li {
+    margin: 5px;
+    padding: 10px; 
+    border: 0px; 
+    border-radius: 10px;
+    display: inline-block;
+    background-color: gray;
+    color:white;
+  }
+  
+
+  
+  </style>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- 헤더 레이아웃 분리 -->
+        <header th:replace="~{layout/header::header}"></header>
+
+
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+
+        <!-- Hero Start -->
+        <div class="container-fluid py-5 mb-5 hero-header">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-md-12 col-lg-7">
+                        <h4 class="mb-3 text-secondary">새로운 취미를 만들고 싶나요?</h4>
+                        <h1 class="mb-5 display-3 text-primary">다양한 사람들과<br> 어울려보세요!</h1>
+                       
+                    </div>
+                    <div class="col-md-12 col-lg-5">
+                        <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active rounded">
+                                    <img src="img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                                </div>
+                                <div class="carousel-item rounded">
+                                    <img src="img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero End -->
+        
+        <!-- 본문 시작 -->
+           <div>
+              
+            
+           <form action="">
+           <div id="whole-wrapper">
+           <div id="first-wrapper">
+           <div id="phto-name-wrapper" class="d-flex align-items-end">
+           <div id="profile-photo"></div>  
+           <input class="form-control" id="name" placeholder="모임 이름을 만들어보세요!" style="height:36px; width:260px;">
+           </div>
+           
+           
+           <div id="cate">
+           <input type="text" id="cate-text" class="form-control" placeholder="모임의 카테고리를 설정해주세요!">
+           <table id="cate-table" class="table" style="height:250px;">
+			    <thead>
+			        <tr>
+			            <th>대분류</th>
+			            <th>중분류</th>
+			            <th>소분류</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr>
+			            <td></td>
+			            <td></td>
+			            <td></td>
+			        </tr>
+			    </tbody>
+			</table>
+          </div>
+         </div>
+          
+          
+         <div id="second-wrapper">
+         <div id="point" class="mb-5">
+         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3">고르기</button>
+         <div class="form-control my-2" id="personal-point" placeholder="어떤 사람을 선호하나요?">
+
+
+              <ul>
+                <li>말없어요</a></li>
+                <li>INSP</a></li>
+                <li>귀가는 각자</a></li>
+                <li>커피 좋아요</a></li>
+                <li>술 안마셔요</a></li>
+              </ul>
+
+            </div> 
+         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3 mt-4">고르기</button>
+         
+         <div class="form-control my-2" id="team-point" placeholder="이 모임은 어떤 특성을 가지고 있나요?">
+          <ul>
+                <li>말없어요</a></li>
+                <li>INSP</a></li>
+                <li>귀가는 각자</a></li>
+                <li>커피 좋아요</a></li>
+                <li>술 안마셔요</a></li>
+              </ul>
+              </div>
+         </div> 
+         
+         <div id="locaton-pay">
+          <input type="text" id="locate" class="form-control mb-2" placeholder="모임에 비용이 필요한가요?">
+          <input type="text" id="pay" class="form-control" placeholder="어디에서 만나나요?">
+         </div>
+         
+          <button class="btn form-control border-secondary py-3 bg-white text-primary " type="submit">모임생성</button>  
+          </div>
+         </div>
+              
+         </form>        
+              </div>
+             
+        
+
+        <!-- 본문 종료 -->
+		<!-- footer 분리 -->
+		<footer th:replace="~{layout/footer::footer}"></footer>
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        
+        <!-- 공통된 javascript 파일 분리 -->
+		<div th:replace="~{scripts/scripts::scripts}"></div>
+    
+    </body>
+
+</html>
