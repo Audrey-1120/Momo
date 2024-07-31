@@ -8,6 +8,7 @@
     
    	<!-- css 파일 적용 -->
 	<link href="css/admin/admin.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css" />
     
   <body>
 
@@ -50,7 +51,7 @@
                                     <a href="/adminCategory.page" class="dropdown-item">카테고리&태그 수정</a>
                                 </div>
                             </div>
-                            <a href="shop-detail.html" class="nav-item nav-link">문의 관리</a>
+                            <a href="/adminAsk.page" class="nav-item nav-link">문의 관리</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
@@ -103,125 +104,146 @@
         <!-- Checkout Page Start -->
         <div class="container-fluid py-5">
             <div class="container-fluid py-5 px-5">
-                <h1>카테고리 관리</h1>
+                <h1 class="mb-3">카테고리 & 태그 관리</h1>
                 <form action="#">
                     <div class="row g-5">
-                        <div class="col-md-12 col-lg-6 col-xl-8">
-	                	  <div class="d-flex justify-content-end">
-	                	    <button id="select-delete-btn">선택삭제</button>
-	                        <select id="users" name="userlist" class="border-0 form-select-sm bg-light" form="userform" style="margin-right: 0.5rem;">
-                              <option value="volvo">회원번호순</option>
-                              <option value="saab">팀장</option>
-                              <option value="opel">활동중지</option>
-                              <option value="audi">신고횟수</option>
-	                        </select>
-	                        <div class="input-group" style="width: auto;">
-                              <input type="search" class="border-0 form-select-sm bg-light" placeholder="검색어를 입력해주세요" aria-describedby="search-icon-1">
-                              <span id="search-icon-1" class="input-group-text"><i class="fa fa-search"></i></span>
-                            </div>
-	                      </div>
-	                      
-						<div class="mb-3">
-						  <h4>Categories</h4>
-						  <ul class="list-unstyled fruite-categorie">
-						    <li>
-						      <div class="d-flex justify-content-between fruite-name">
-						        <a href="#" class="category-toggle">
-						          <i class="fas fa-apple-alt me-2"></i>Apples
-						        </a>
-						      </div>
-						      <ul class="sub-categories" style="display: none;">
-						        <li>
-						          <div class="d-flex justify-content-between fruite-name">
-						            <a href="#" class="category-toggle">
-						              <i class="fas fa-apple-alt me-2"></i>Red Apples
-						            </a>
-						          </div>
-						          <ul class="sub-categories" style="display: none;">
-						            <li>
-						              <div class="d-flex justify-content-between fruite-name">
-						                <a href="#">
-						                  <i class="fas fa-apple-alt me-2"></i>Gala
-						                </a>
-						              </div>
-						            </li>
-						            <li>
-						              <div class="d-flex justify-content-between fruite-name">
-						                <a href="#">
-						                  <i class="fas fa-apple-alt me-2"></i>Fuji
-						                </a>
-						              </div>
-						            </li>
-						          </ul>
-						        </li>
-						        <li>
-						          <div class="d-flex justify-content-between fruite-name">
-						            <a href="#" class="category-toggle">
-						              <i class="fas fa-apple-alt me-2"></i>Green Apples
-						            </a>
-						          </div>
-						          <ul class="sub-categories" style="display: none;">
-						            <li>
-						              <div class="d-flex justify-content-between fruite-name">
-						                <a href="#">
-						                  <i class="fas fa-apple-alt me-2"></i>Granny Smith
-						                </a>
-						              </div>
-						            </li>
-						          </ul>
-						        </li>
-						      </ul>
-						    </li>
-						    <!-- 다른 대분류 항목들 -->
-						  </ul>
-						</div>
-						
-						
-						
-
-	                      
-	                      
-	                      
-	                      
-
-                            
+                        <div class="col-md-12 col-lg-3 col-xl-3">
+                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-dismiss">추가</button>
+                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-modify">수정</button>
+						  <h4 class="mb-3">카테고리</h4>
+							<!-- 카테고리 -->
+							<div class="mb-3 bg-light py-3 rounded">
+							  <ul id="category-list"></ul>
+							</div>
                         </div>
-                        <div class="col-md-12 col-lg-6 col-xl-4">
-                        	<h3>상세보기</h3>
+                        
+                        <!-- 카테고리 추가 부분 -->
+                        <div class="col-md-12 col-lg-3 col-xl-3">
+                          <h4 class="mb-3">카테고리 추가</h4>
+                          <label class="form-label my-3">1. 추가할 카테고리의 분류를 선택하세요.</label>
+						  <select id="selectCategory" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                            <option value="majorCate">대분류</option>
+                            <option value="middleCate">중분류</option>
+                            <option value="smallCate">소분류</option>
+                          </select>
+                          
+                          <!-- 대분류 선택 시 -->
+	                      <div class="form-item majorCate">
+                            <label class="form-label my-3">2. 추가 카테고리명 입력</label>
+                            <input type="text" class="form-control" value="ex) 예술&문화">
+                          </div>
+                          
+                          <!-- 중분류 선택 시 -->
+                          <div class="form-item middleCate" style="display:none;">
+                            <label class="form-label my-3">2. 상위 카테고리 선택(대분류)</label>
+                            <select id="selectMajorCategory1" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                              <option value="book">독서</option>
+                              <option value="sport">스포츠&레저</option>
+                              <option value="art">예술&문화</option>
+                              <option value="cook">요리&음료</option>
+                              <option value="game">취미&오락</option>
+                          	</select>
+                          	<label class="form-label my-3">3. 추가 카테고리명 입력</label>
+                            <input type="text" class="form-control" value="ex) 영화">
+                          </div>
+                          
+                          <!-- 소분류 선택 시 -->
+                          <div class="form-item smallCate" style="display:none;">
+                            <label class="form-label my-3">2. 상위 카테고리 선택(대분류)</label>
+                            <select id="selectMajorCategory2" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                              <option value="book">독서</option>
+                              <option value="sport">스포츠&레저</option>
+                              <option value="art">예술&문화</option>
+                              <option value="cook">요리&음료</option>
+                              <option value="game">취미&오락</option>
+                          	</select>
+                          	
+                          	<!-- 대분류에 따라서 달라짐.. -->
+                          	<label class="form-label my-3">3. 상위 카테고리 선택(중분류)</label>
+                            <select id="selectMiddleCategory" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                              <option value="volvo">소설</option>
+                              <option value="saab">비소설</option>
+                          	</select>   
+                          	<label class="form-label my-3">4. 추가 카테고리명 입력</label>                       	
+                            <input type="text" class="form-control" value="ex) 공포">
+                          </div>
+                        </div>
+                        
+
+
+
+
+						<!-- 태그 목록 -->
+                        <div class="col-md-12 col-lg-3 col-xl-3">
+                       	  <h4>태그 목록</h4>
+                       	  <button id="select-delete-btn">선택삭제</button>
+						  <div class="mb-3 bg-light py-3 rounded">
+						    <div class="table-responsive">
+						      <table class="table tag-table">
+						        <thead>
+						          <tr>
+						            <th scope="col">선택</th>
+						            <th scope="col">태그명</th>
+						          </tr>
+						        </thead>
+						        <tbody>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#가벼운운동</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#밥은따로먹어요</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#개인연락하지않아요</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#귀가는 각자</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#간식 좋아요</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#음식 강요 싫어요</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#평일에만 만나요</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#휴대폰만할거면가세요</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#오픈마인드</td>
+						          </tr>
+						          <tr>
+						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td>#온라인참여가능</td>
+						          </tr>
+						        </tbody>
+						      </table>
+						    </div>
+						
+						
+						  </div>
+                        </div>
+                        
+                        
+                        <div class="col-md-12 col-lg-3 col-xl-3">
+                        	<h4>태그 추가</h4>
                         	<div class="form-item d-flex justify-content-center align-items-center">
                                 <img src="img/vegetable-item-3.png" class="img-fluid rounded-circle" style="width: 80px;height: 80px;" alt="">
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 col-lg-6">
-                                    <div class="form-item w-100">
-                                        <label class="form-label my-3">회원번호</label>
-                                        <input type="text" class="form-control" value="u0002" disabled>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-item">
-                                <label class="form-label my-3">이메일</label>
-                                <input type="email" class="form-control" value="ACA2929@naver.com" disabled>
-                            </div>
-                            <div class="form-item">
-                                <label class="form-label my-3">닉네임</label>
-                                <input type="text" class="form-control" value="Aca77">
-                            </div>
-                            <div class="form-item">
-                                <label class="form-label my-3">가입경로</label>
-                                <input type="text" class="form-control" value="네이버" disabled>
-                            </div>
-                            <div class="form-item">
-                                <label class="form-label my-3">최근접속시기</label>
-                                <input type="text" class="form-control" value="2024.07.02 오후 11:45" disabled>
-                            </div>
-                            <div class="form-item">
-                                <label class="form-label my-3">신고횟수</label>
-                                <input type="text" class="form-control" value="2">
-                            </div>
-                            <div class="form-item">
-                                <label class="form-label my-3">기타</label>
-                                <input type="tel" class="form-control" value="최근 다수 접속했음. 회원들로부터 신고 접수 많음.">
+                                <label class="form-label my-3">추가 태그 입력</label>
+                                <input type="text" class="form-control" value="ex) #술못마셔도오케이">
                             </div>
                             <div class="form-item">
                             	<label class="form-label my-3">알림 발송</label>
@@ -230,11 +252,18 @@
                                 </textarea>
                             </div>
                             <div class="form-item">
-                            	<button type="button" class="btn border-secondary mt-2 btn-inactive">활동중지</button>
+                            	<button type="button" class="btn border-secondary px-4 mt-2 btn-inactive">삭제</button>
                             	<button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
                                 <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">수정</button>
                             </div>
-                        </div>                        
+                        </div>
+
+
+
+
+
+
+                       
                     </div>
                 </form>
             </div>
@@ -250,24 +279,9 @@
         <!-- 공통된 javascript 파일 분리 -->
 		<div th:replace="~{/scripts/scripts::scripts}"></div>
 
-		<script>
-		  const pageHeader = $('.page-header');
-		  pageHeader.css('backgroundImage', 'none');
-		  pageHeader.css('background-color', '#81C408');
-		  
-		  // 카테고리
-		  const categoryToggles = document.querySelectorAll('.category-toggle');
-		
-		  categoryToggles.forEach(toggle => {
-		    toggle.addEventListener('click', (event) => {
-		      event.preventDefault();
-		      const subCategories = event.target.closest('li').querySelector('.sub-categories');
-		      subCategories.classList.toggle('active');
-		    });
-		  });
-		</script>
-		
-		
+		<!-- 240731 : js 파일 분리 -->
+		<script src="js/adminCategory.js"></script>
+
 		
 
 </body>

@@ -30,5 +30,11 @@ public class AdminController {
     return "admin/adminCategory";
   }
   
+  // 문의 관리 페이지
+  @GetMapping("/adminAsk.page")
+  public String adminAsk() {
+    return "admin/adminAsk";
+  }
+  
 
 }

@@ -41,15 +41,73 @@
 
 
 /* --------- adminCategory --------- */
-.sub-categories {
-  margin-left: 20px;
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
 }
 
-.sub-categories li {
-  display: none;
+li {
+  margin: 5px 0;
 }
 
-.sub-categories.active {
-  display: block;
-}		
+/* jstree 커스텀 */
+.jstree .jstree-anchor {
+    color: #4CAF50; /* 텍스트 색상 */
+    font-weight: 500; /* 텍스트 두께 */
+}
+
+/* 노드의 선 색상 변경 */
+.jstree .jstree-open > .jstree-anchor:before {
+    content: '';
+    border: 1px solid #81C408; /* 선 색상 */
+    margin-right: 5px;
+    height: 20px; /* 선 높이 */
+}
+
+.jstree .jstree-closed > .jstree-anchor:before {
+    content: '';
+    border: 1px solid #81C408; /* 다른 선 색상 */
+    margin-right: 5px;
+    height: 20px; /* 선 높이 */
+}
+
+/* 자식 노드의 선 스타일 변경 */
+.jstree .jstree-leaf > .jstree-anchor:before {
+    content: '';
+    border: 1px solid #81C408; /* 대시 선 색상 */
+    margin-right: 5px;
+    height: 20px; /* 선 높이 */
+}
+
+
+
+
+
+#category-list {
+  font-size: 1rem;
+}
+
+/* 중분류 카테고리 선택 */
+.middleCate {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 소분류 카테고리 선택 */
+.smallCate {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 태그 테이블 */
+.tag-table th:first-child, 
+.tag-table td:first-child {
+  width: 3rem;
+  max-width: 10%;
+}
+
+
+
+
 
