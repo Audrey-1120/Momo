@@ -75,12 +75,57 @@
 	
   }
 
-
-
-
-
-
+  // 카테고리 버튼 클릭 시 추가 혹은 수정 화면 띄워주기
+  const fnShowCategoryEdit = () => {
+	let addCategorySection = $('.add-category-sec');
+	let modifyCategorySection = $('.modify-category-sec');
+	
+	// 1. 추가 버튼 클릭 시
+	$('.btn-addCate').on('click', () => {
+	  addCategorySection.toggle();
+	  modifyCategorySection.hide();
+	})
+	
+	// 2. 수정 버튼 클릭 시
+	$('.btn-modifyCate').on('click', () => {
+	  addCategorySection.hide();
+	  modifyCategorySection.toggle();
+	})
+  }
   
+  // 태그 버튼 추가 혹은 수정 화면 표시
+  const fnShowTagEdit = () => {
+	let addTagSection = $('.add-tag-sec');
+	let modifyTagSection = $('.modify-tag-sec');
+	let modifyTagInput = $('#modifyTagInput');
+	
+	// 1. 추가 버튼 클릭 시
+	$('.btn-addTag').on('click', () => {
+	  addTagSection.toggle();
+	  modifyTagSection.hide();
+	})
+	
+	// 2. 수정 버튼 클릭 시
+	$('.modify-tag').on('click', (evt) => {
+      console.log('태그 수정 버튼 클릭');
+		
+	  addTagSection.hide();
+	  modifyTagSection.show();
+	  
+	  // 클릭한 요소의 형제 요소의 태그명 가져와서 input에 넣기
+	  
+	  let tagName = $(evt.currentTarget).closest('tr').find('td:nth-child(2)').text().trim();
+	  
+	  modifyTagInput.val(tagName);
+	  
+	})
+  }
+
+
+
+
+
+
   // 선택한 분류에 따라서 카테고리 추가
   const fnAddCategory = () => {
 	
@@ -91,22 +136,24 @@
 	
 	selectedCategory.on('change', () => {
 	  if(selectedCategory.val() === 'majorCate') {
-	    majorCate.css('display', '');
-	    middleCate.css('display', 'none'); 
-	    smallCate.css('display', 'none');
+	    majorCate.toggle();
+	    middleCate.hide();
+	    smallCate.hide();
 	  } else if(selectedCategory.val() === 'middleCate') {
-	    majorCate.css('display', 'none');
-	    middleCate.css('display', 'flex');
-	    smallCate.css('display', 'none');
+	    majorCate.hide();
+	    middleCate.toggle();
+	    smallCate.hide();
 	  } else {
-	    majorCate.css('display', 'none');
-	    middleCate.css('display', 'none');
-	    smallCate.css('display', 'flex');
+	    majorCate.hide();
+	    middleCate.hide();
+	    smallCate.toggle();
 	  }
 	})
   }
   
   fnBuildTree(categories);
   fnAddCategory();
+  fnShowCategoryEdit();
+  fnShowTagEdit();
   
   

@@ -42,13 +42,13 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="/adminUser.page" class="nav-item nav-link active">사용자 관리</a>
+                            <a href="/adminUser.page" class="nav-item nav-link">사용자 관리</a>
                             <a href="/adminReport.page" class="nav-item nav-link">신고관리</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">모임&카테고리 관리</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="/adminMeet.page" class="dropdown-item">모임 목록 조회</a>
-                                    <a href="/adminCategory.page" class="dropdown-item">카테고리&태그 수정</a>
+                                    <a href="/adminCategory.page" class="dropdown-item active">카테고리&태그 수정</a>
                                 </div>
                             </div>
                             <a href="/adminAsk.page" class="nav-item nav-link">문의 관리</a>
@@ -108,9 +108,9 @@
                 <form action="#">
                     <div class="row g-5">
                         <div class="col-md-12 col-lg-3 col-xl-3">
-                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-dismiss">추가</button>
-                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-modify">수정</button>
-						  <h4 class="mb-3">카테고리</h4>
+                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-addCate">추가</button>
+                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-modify btn-modifyCate">수정</button>
+						  <h4 class="mb-3">카테고리 목록</h4>
 							<!-- 카테고리 -->
 							<div class="mb-3 bg-light py-3 rounded">
 							  <ul id="category-list"></ul>
@@ -118,7 +118,7 @@
                         </div>
                         
                         <!-- 카테고리 추가 부분 -->
-                        <div class="col-md-12 col-lg-3 col-xl-3">
+                        <div class="col-md-12 col-lg-3 col-xl-3 add-category-sec" style="display:none">
                           <h4 class="mb-3">카테고리 추가</h4>
                           <label class="form-label my-3">1. 추가할 카테고리의 분류를 선택하세요.</label>
 						  <select id="selectCategory" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
@@ -128,7 +128,7 @@
                           </select>
                           
                           <!-- 대분류 선택 시 -->
-	                      <div class="form-item majorCate">
+	                      <div class="form-item majorCate" style="display:none;">
                             <label class="form-label my-3">2. 추가 카테고리명 입력</label>
                             <input type="text" class="form-control" value="ex) 예술&문화">
                           </div>
@@ -167,16 +167,75 @@
                           	<label class="form-label my-3">4. 추가 카테고리명 입력</label>                       	
                             <input type="text" class="form-control" value="ex) 공포">
                           </div>
+                          <div class="form-item">
+                      	    <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
+                            <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">확인</button>
+                          </div>                            
                         </div>
-                        
 
+                        
+                        
+                        
+                        
+                        <!-- 카테고리 수정 부분 -->
+                        <div class="col-md-12 col-lg-3 col-xl-3 modify-category-sec" style="display:none">
+                          <h4 class="mb-3">카테고리 수정</h4>
+                          <label class="form-label my-3">1. 수정할 카테고리를 선택하세요.</label>
+                          
+                          <!-- 대분류 선택 시 -->
+	                      <div class="form-item majorCate-modify">
+                            <label class="form-label my-3">2. 수정할 카테고리명 입력</label>
+                            <input type="text" class="form-control" value="ex) 예술&문화">
+                          </div>
+                          
+                          <!-- 중분류 선택 시 -->
+                          <div class="form-item middleCate-modify" style="display:none;">
+                            <label class="form-label my-3">2. 상위 카테고리(대분류)</label>
+                            <select id="selectMajorCategory3" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                              <option value="book">독서</option>
+                              <option value="sport">스포츠&레저</option>
+                              <option value="art">예술&문화</option>
+                              <option value="cook">요리&음료</option>
+                              <option value="game">취미&오락</option>
+                          	</select>
+                          	<label class="form-label my-3">3. 수정할 카테고리명 입력</label>
+                            <input type="text" class="form-control" value="ex) 영화">
+                          </div>
+                          
+                          <!-- 소분류 선택 시 -->
+                          <div class="form-item smallCate-modify" style="display:none;">
+                            <label class="form-label my-3">2. 상위 카테고리(대분류)</label>
+                            <select id="selectMajorCategory4" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                              <option value="book">독서</option>
+                              <option value="sport">스포츠&레저</option>
+                              <option value="art">예술&문화</option>
+                              <option value="cook">요리&음료</option>
+                              <option value="game">취미&오락</option>
+                          	</select>
+                          	
+                          	<!-- 대분류에 따라서 달라짐.. -->
+                          	<label class="form-label my-3">3. 상위 카테고리(중분류)</label>
+                            <select id="selectMiddleCategory2" name="categorylist" class="border-0 form-select-sm pe-5" form="categoryform" style="margin-right: 0.5rem;font-size: 1.2rem;outline: none;">
+                              <option value="volvo">소설</option>
+                              <option value="saab">비소설</option>
+                          	</select>   
+                          	<label class="form-label my-3">4. 수정할 카테고리명 입력</label>                       	
+                            <input type="text" class="form-control" value="ex) 공포">
+                          </div>
+                          <div class="form-item">
+                      	    <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
+                            <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">확인</button>
+                          </div>                           
+                        </div>
 
 
 
 						<!-- 태그 목록 -->
                         <div class="col-md-12 col-lg-3 col-xl-3">
-                       	  <h4>태그 목록</h4>
-                       	  <button id="select-delete-btn">선택삭제</button>
+                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-addTag">추가</button>
+                          <button type="button" class="btn border-secondary py-1 text-primary mb-3 btn-modify btn-inactive">삭제</button> 
+                       	  <h4 class="mb-3">태그 목록</h4>
+                       	  <!-- <button type="button" class="btn border-secondary px-4 mt-2 btn-inactive">삭제</button> -->
 						  <div class="mb-3 bg-light py-3 rounded">
 						    <div class="table-responsive">
 						      <table class="table tag-table">
@@ -184,48 +243,59 @@
 						          <tr>
 						            <th scope="col">선택</th>
 						            <th scope="col">태그명</th>
+						            <th scope="col"></th>
 						          </tr>
 						        </thead>
 						        <tbody>
 						          <tr>
 						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
 						            <td>#가벼운운동</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-2" name="Accounts" value="Accounts"></td>
 						            <td>#밥은따로먹어요</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-3" name="Accounts" value="Accounts"></td>
 						            <td>#개인연락하지않아요</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-4" name="Accounts" value="Accounts"></td>
 						            <td>#귀가는 각자</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-5" name="Accounts" value="Accounts"></td>
 						            <td>#간식 좋아요</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-6" name="Accounts" value="Accounts"></td>
 						            <td>#음식 강요 싫어요</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-7" name="Accounts" value="Accounts"></td>
 						            <td>#평일에만 만나요</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-8" name="Accounts" value="Accounts"></td>
 						            <td>#휴대폰만할거면가세요</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-9" name="Accounts" value="Accounts"></td>
 						            <td>#오픈마인드</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						          <tr>
-						            <td><input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts"></td>
+						            <td><input type="checkbox" class="form-check-input" id="Account-10" name="Accounts" value="Accounts"></td>
 						            <td>#온라인참여가능</td>
+						            <td class="modify-tag"><i class="far fa-edit"></i></td>
 						          </tr>
 						        </tbody>
 						      </table>
@@ -235,28 +305,32 @@
 						  </div>
                         </div>
                         
-                        
-                        <div class="col-md-12 col-lg-3 col-xl-3">
+                        <!-- 태그 추가 란 -->
+                        <div class="col-md-12 col-lg-3 col-xl-3 add-tag-sec" style="display: none;">
                         	<h4>태그 추가</h4>
-                        	<div class="form-item d-flex justify-content-center align-items-center">
-                                <img src="img/vegetable-item-3.png" class="img-fluid rounded-circle" style="width: 80px;height: 80px;" alt="">
-                            </div>
                             <div class="form-item">
-                                <label class="form-label my-3">추가 태그 입력</label>
+                                <label class="form-label my-3">추가 태그명 입력</label>
                                 <input type="text" class="form-control" value="ex) #술못마셔도오케이">
                             </div>
-                            <div class="form-item">
-                            	<label class="form-label my-3">알림 발송</label>
-                            	<button type="button" class="btn border-secondary btn-send">전송하기</button>
-                                <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="알림 내용을 입력해주세요">
-                                </textarea>
-                            </div>
-                            <div class="form-item">
-                            	<button type="button" class="btn border-secondary px-4 mt-2 btn-inactive">삭제</button>
-                            	<button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
-                                <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">수정</button>
-                            </div>
+	                        <div class="form-item">
+	                        	<button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
+	                            <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">확인</button>
+	                        </div>                                
                         </div>
+                        
+                        <!-- 태그 수정 란 -->
+                        <div class="col-md-12 col-lg-3 col-xl-3 modify-tag-sec" style="display:none;">
+                        	<h4>태그 수정</h4>
+                            <div class="form-item">
+                                <label class="form-label my-3">수정할 태그명 입력</label>
+                                <input id="modifyTagInput" type="text" class="form-control" value="ex) #술못마셔도오케이">
+                            </div>
+	                        <div class="form-item">
+	                        	<button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-dismiss">취소</button>
+	                            <button type="button" class="btn border-secondary px-4 text-primary mt-2 btn-modify">확인</button>
+	                        </div>                             
+                        </div>
+                       
 
 
 

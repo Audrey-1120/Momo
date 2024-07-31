@@ -12,7 +12,7 @@
 /* 활동중지 버튼 */
 .btn-inactive {
   background-color: red;
-  color: white;
+  color: white !important;
   border: none;
 }
 
@@ -23,7 +23,9 @@
 }
 
 /* 취소 버튼 */
-.btn-dismiss {
+.btn-dismiss,
+.btn-addCate,
+.btn-addTag {
   float: right;
 }
 
@@ -89,24 +91,36 @@ li {
 }
 
 /* 중분류 카테고리 선택 */
-.middleCate {
+.middleCate,
+.middleCate-modify {
   display: flex;
   flex-direction: column;
 }
 
 /* 소분류 카테고리 선택 */
-.smallCate {
+.smallCate,
+.smallCate-modify {
   display: flex;
   flex-direction: column;
 }
 
-/* 태그 테이블 */
+/* 태그 테이블 - 체크박스 */
 .tag-table th:first-child, 
 .tag-table td:first-child {
   width: 3rem;
   max-width: 10%;
 }
 
+/* 태그 테이블 - 수정 아이콘 간격 조절 */
+.tag-table th:last-child, 
+.tag-table td:last-child {
+  max-width: 1.3rem;
+}
+
+/* 태그 테이블 - 수정 아이콘 */
+.modify-tag {
+  cursor: pointer;
+}
 
 
 
