@@ -31,8 +31,14 @@
     border: 0px; 
     border-radius: 10px;
     display: inline-block;
-    background-color: lightgrey;
+    background-color:yellowgreen;
     color:white;
+  }
+  
+  #personal-point {
+  width: 600px;
+  background-color: white;
+  border: none;
   }
   
   
@@ -135,8 +141,8 @@
                                     <div class="nav nav-tabs mb-3">
                                         <button class="nav-link active border-white border-bottom-0" type="button" role="tab" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about" aria-controls="nav-about" aria-selected="true">정보</button>
                                         <button class="nav-link border-white border-bottom-0" type="button" role="tab" id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission" aria-controls="nav-mission" aria-selected="false">이야기</button>
-                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab" id="nav-chat-tab" data-bs-toggle="tab" data-bs-target="#nav-chat" aria-controls="nav-chat" aria-selected="false">채팅</button>
-                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" aria-controls="nav-member" aria-selected="false">멤버</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab" id="nav-chat-tab" data-bs-toggle="tab" data-bs-target="#nav-chat" aria-controls="nav-chat" aria-selected="false">채팅&멤버</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab" id="nav-member-tab" data-bs-toggle="tab" data-bs-target="#nav-member" aria-controls="nav-member" aria-selected="false">멤버관리</button>
                                     </div>
                                 </nav>
                                 
@@ -246,10 +252,71 @@
                                </div>
                                
                                <div class="tab-pane" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab">
-                              
-                               
-                               
-                               </div>
+                              <!-- Content Wrapper. Contains page content -->
+                               <h1 class="text-primary">멤버</h1>
+                               <div class="table-responsive">
+                   <table class="table">
+                       <thead>
+                         <tr>
+                           <th scope="col" id="프사" style="width:100px;"></th>
+                           <th scope="col" id="이름">이름</th>
+                           <th scope="col">소개</th>
+                           <th scope="col" id="신고"></th>
+                           <th scope="col" id="강퇴">신고</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <th scope="row">
+                                   <div class="d-flex align-items-center">
+                                       <img src="img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                   </div>
+                               </th>
+                               <td>
+                                   <p class="mb-0 mt-4">Banana</p>
+                               </td>
+                               <td>
+                                   <p class="mb-0 mt-4">구워먹는게 좋아요	</p>
+                                  
+                               </td>
+                               <td>
+              <div class="form-control my-2" id="personal-point">
+              <ul>
+                <li>말없어요</a></li>
+                <li>INSP</a></li>
+                <li>귀가는 각자</a></li>
+                <li>커피 좋아요</a></li>
+                <li>술 안마셔요</a></li>
+              </ul>
+
+            </div> 
+                               </td>
+                               <td>
+                                   <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                       <i class="fa fa-times text-danger"></i>
+                                   </button>
+                               </td>
+                           
+                           </tr>
+                         
+                       </tbody>
+                   </table>
+               </div>
+               
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content chat-content">
+
+			<!-- 목록 화면 - 직원, 채팅목록 -->
+      <!-- Default box -->
+      <div class="box member-box">
+        <div class="box-body chat-member"></div> 
+   			<div class="addChatroomBtn-cover">
+	       <button type="button" class="btn btn-block btn-primary addChatRoomBtn">채팅창</button>
+	      </div>
+      </div>
+  </div>
+  </div>
                                
                                <div class="tab-pane" id="nav-member" role="tabpanel" aria-labelledby="nav-member-tab">
                                <h1 class="text-primary">멤버</h1>
@@ -344,7 +411,10 @@
                      </div>
                    </div>
                    </div>
-                                 
+        
+        
+        <script src="${contextPath}/js/chat1.js?dt=${dt}"></script>
+        <script src="${contextPath}/js/chat2.js?dt=${dt}"></script>                         
    
        
 		<!-- footer 분리 -->
