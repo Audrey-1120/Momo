@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/* 로그인 로고 */
+.login-logo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 로그인 로고 이미지 */
+.login-logo img {
+   width: 500px;
+   margin: 0 auto;
+   padding: 0.5rem;
+}
+
