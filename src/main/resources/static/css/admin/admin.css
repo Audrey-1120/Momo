@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+/* --------- adminUser --------- */
+
+/* 상단 선택삭제 버튼 */
+#select-delete-btn {
+  border: none;
+  margin-right: 0.5rem;
+  background-color: #f4f6f8;
+}
+
+/* 활동중지 버튼 */
+.btn-inactive {
+  background-color: red;
+  color: white !important;
+  border: none;
+}
+
+/* 수정 버튼 */
+.btn-modify {
+  margin-right: 0.5rem;
+  float: right;
+}
+
+/* 취소 버튼 */
+.btn-dismiss,
+.btn-addCate,
+.btn-addTag {
+  float: right;
+}
+
+/* 전송하기 버튼 - 알림 발송 */
+.btn-send {
+  font-size: 13px;
+  padding: revert;
+}
+
+/* --------- adminMeet --------- */
+/* 참여인원수 */
+.headCount {
+  color: #F18D00;
+}
+
+
+/* --------- adminCategory --------- */
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
+}
+
+/* jstree 커스텀 */
+.jstree .jstree-anchor {
+    color: #4CAF50; /* 텍스트 색상 */
+    font-weight: 500; /* 텍스트 두께 */
+}
+
+/* 노드의 선 색상 변경 */
+.jstree .jstree-open > .jstree-anchor:before {
+    content: '';
+    border: 1px solid #81C408; /* 선 색상 */
+    margin-right: 5px;
+    height: 20px; /* 선 높이 */
+}
+
+.jstree .jstree-closed > .jstree-anchor:before {
+    content: '';
+    border: 1px solid #81C408; /* 다른 선 색상 */
+    margin-right: 5px;
+    height: 20px; /* 선 높이 */
+}
+
+/* 자식 노드의 선 스타일 변경 */
+.jstree .jstree-leaf > .jstree-anchor:before {
+    content: '';
+    border: 1px solid #81C408; /* 대시 선 색상 */
+    margin-right: 5px;
+    height: 20px; /* 선 높이 */
+}
+
+
+
+
+
+#category-list {
+  font-size: 1rem;
+}
+
+/* 중분류 카테고리 선택 */
+.middleCate,
+.middleCate-modify {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 소분류 카테고리 선택 */
+.smallCate,
+.smallCate-modify {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 태그 테이블 - 체크박스 */
+.tag-table th:first-child, 
+.tag-table td:first-child {
+  width: 3rem;
+  max-width: 10%;
+}
+
+/* 태그 테이블 - 수정 아이콘 간격 조절 */
+.tag-table th:last-child, 
+.tag-table td:last-child {
+  max-width: 1.3rem;
+}
+
+/* 태그 테이블 - 수정 아이콘 */
+.modify-tag {
+  cursor: pointer;
+}
+
+
+
+
