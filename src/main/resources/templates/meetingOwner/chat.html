@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en"	  
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- <head>태그 내 공통된 stylesheets 분리 -->
+    <head th:replace="~{stylesheets/head :: head (title='Momo, 새로운 즐거움의 시작')}"></head>
+
+    <body>
+    
+ 
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- 헤더 레이아웃 분리 -->
+        <header th:replace="~{layout/header::header}"></header>
+
+
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+
+        <!-- Hero Start -->
+        <div class="container-fluid py-5 mb-5 hero-header">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-md-12 col-lg-7">
+                        <h4 class="mb-3 text-secondary">aaa님은 지금 n개의 모임을 운영하고 있어요!</h4>
+                        <h1 class="mb-5 display-3 text-primary">새로운 모임을 <br>만들고 싶으신가요?</h1>
+                        <div class="position-relative mx-auto">
+                            <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-160" style="top: 0; right: 25%;">모임 만들기</button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-5">
+                        <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active rounded">
+                                    <img src="img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                                </div>
+                                <div class="carousel-item rounded">
+                                    <img src="img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero End -->
+       
+         <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        채팅
+        <!-- <small>it all starts here</small> -->
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content chat-content">
+
+			<!-- 목록 화면 - 직원, 채팅목록 -->
+      <!-- Default box -->
+      <div class="box member-box">
+         <div class="box-header with-border">
+	         <div class="box-title-choice">
+	           <i class="fa fa-user" style="cursor: pointer;"></i>
+	           <i class="fa fa-comment" style="cursor: pointer;"></i>
+	         </div>
+
+         
+         	 <!-- 닫기 버튼이랑 메뉴 버튼 -->
+	         <div class="box-tools pull-right">
+	           <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+	             <i class="fa fa-minus"></i>
+	           </button>
+	         </div>
+          </div>
+          <p class="chat-member-title">직원목록</p>
+<!--           <div class="searchInput-cover">
+            <input type="text" class="searchInput" placeholder="직원 검색">
+          </div> -->
+        <div class="box-body chat-member"></div> 
+   			<div class="addChatroomBtn-cover">
+	       <button type="button" class="btn btn-block btn-primary addChatRoomBtn">+ 새 그룹채팅방 생성</button>
+	      </div>
+      </div>
+
+      
+            <!-- 프로필 조회 모달창 -->
+      <div class="example-modal">
+        <div class="modal fade" id="modal-default" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- 이 부분 프로필 조회, 채팅방 이름 변경에 따라 동적 생성 -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">프로필 조회</h4>
+              </div>
+              <div class="modal-body chatModal-body">
+              	<!-- 여기에 내용 넣으면 됨. -->
+              	<div class="chat-modal-profile">
+	              	<img src="/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
+	              	<p>이름</p>
+	              	<span>부서</span>
+	              	<div class="btn-oneToOneChat">
+	              	  <i class="fa fa-commenting"></i>
+	              	  <p class="selectUserNo">1:1 채팅</p>
+	              	</div>
+              	</div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+      </div>
+      
+            <!-- 그룹 채팅 생성모달창 -->
+      <div class="example-modal">
+        <div class="modal fade" id="modal-default2" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- 이 부분 프로필 조회, 채팅방 이름 변경에 따라 동적 생성 -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">새 채팅방 생성</h4>
+              </div>
+              <div class="modal-body chatModal-body">
+              	<!-- 여기에 내용 넣으면 됨. -->
+              	<h4 class="modal-title">선택한 멤버</h4>
+              	<div class="selected-member-cover"> <!-- 여기에 선택 멤버 들어감. -->
+              	</div> 
+              	<input class="form-control newGroupChatroom-input" type="text" maxlength='20' placeholder="채팅방 이름을 작성해주세요">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-groupChat">확인</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+      </div>
+      
+      <!-- 채팅방 이름 수정 -->
+      <div class="example-modal">
+        <div class="modal fade" id="modal-default3" style="display: none;">
+          <div class="modal-dialog" style="margin: 30rem auto;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">채팅방 이름 수정</h4>
+              </div>
+              <div class="modal-body chatModal-body">
+              	<input class="form-control newChatroomTitle-input" type="text" maxlength='20' placeholder="채팅방 이름을 작성해주세요">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-modifyChatroomTitle">확인</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+      </div>
+      
+      <!-- 채팅방 참여자 초대 -->
+      <div class="example-modal">
+        <div class="modal fade" id="modal-default4" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- 이 부분 프로필 조회, 채팅방 이름 변경에 따라 동적 생성 -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">채팅방 멤버 초대</h4>
+              </div>
+              <div class="modal-body chatModal-body addMember-body">
+              	<!-- 여기에 내용 넣으면 됨. -->
+              	<h4 class="modal-title">초대할 멤버를 선택해주세요</h4>
+              	<div class="selected-addMember-cover"> <!-- 여기에 선택 멤버 들어감. -->
+              	</div> 
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-addNewMember">확인</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+      </div>
+      
+      <!-- 채팅방 부분 -->
+      <div class="chat-memberProfileList"></div>
+      
+      
+      <div class="box chat-box" style="display: none">
+        <div class="box-header with-border">
+          <div class="chat-box-title">
+            <!-- <i class="fa fa-times"></i> -->
+						<span>채팅방 이름</span>
+						<span>2</span>
+          </div>
+          
+          <!-- 상단 메뉴 -->
+          <div class="box-tools pull-right">
+            <!-- 드롭박스.. -->
+	          <div class="dropdown">
+						  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="true">
+						    <i class="fa fa-reorder"></i>
+						  </a>
+						  <div class="dropdown-menu chat-box-dropdown" aria-labelledby="dropdownMenuLink">
+					      <div class="title-row">
+					        <p>현재 활동중</p>
+					      </div>
+					      <div class="participant-body-row">
+								  <table class="participate_statusList">
+								    <tbody>
+								    </tbody>
+								  </table>
+					      </div>
+							  <div class="menu-row-cover">
+					        <p href="#" class="modify-chatTitle"><i class="fa fa-pencil-square-o"></i> 채팅방 이름 수정</p>
+					        <p href="#" class="add-newMember"><i class="fa fa-user-plus"></i> 새 참여자 초대하기</p>
+					        <p href="#" class="leave-chat"><i class="fa fa-sign-out"></i> 채팅방 나가기</p>
+							  </div>
+						  
+							  
+						  </div>
+						</div>
+          </div>
+        </div>
+        <!-- 메시지 창 -->
+        <div class="box-body chat-body">
+        	<div class="chatMessage-body">
+        	
+        	
+        		<!-- 여기에 메시지 추가 -->
+        	
+        	</div>
+        	<!-- 입력창 -->
+         	<div class="chatMessage-input">
+	        	<textarea class="form-control chat-message-input" type="text" maxlength='500' placeholder="메시지를 입력해주세요" style="height: 35px;"></textarea>
+	        	<button type="submit" class="btn btn-primary chatMessage-btn"><i class="fa fa-send"></i></button>
+        	</div>
+        </div>      
+    </section>
+    <!-- /.content -->
+  </div>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+		<!-- footer 분리 -->
+		<footer th:replace="~{layout/footer::footer}"></footer>
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        
+        <!-- 공통된 javascript 파일 분리 -->
+		<div th:replace="~{scripts/scripts::scripts}"></div>
+    
+    </body>
+
+</html>
