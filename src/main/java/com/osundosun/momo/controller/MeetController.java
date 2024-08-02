@@ -17,8 +17,13 @@ public class MeetController {
   }
 
   @GetMapping("/myMeetingDetail.page")
-  public String  myMeetingDetail() {
+  public String myMeetingDetail() {
     return "meetingOwner/myMeetingDetail";
+  }
+  
+  @GetMapping("/meetingDetail.page")
+  public String meetingDetail() {
+	  return "meeting/meetingDetail";
   }
  
 }
