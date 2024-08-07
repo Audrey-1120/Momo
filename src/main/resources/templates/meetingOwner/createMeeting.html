@@ -158,8 +158,10 @@
         <!-- 본문 시작 -->
            <div>
               
-            
-           <form action="">
+            <!-- 타임리프의 경우 별도의 contextPath 설정이 필요없이 바로 사용할 수 있다. @{} -->
+           <form action="@{/createMeeting.do}"
+                 id="frm"
+                 method="POST">
            <div id="whole-wrapper">
            <div id="first-wrapper">
            <div id="phto-name-wrapper" class="d-flex align-items-end">
@@ -192,7 +194,9 @@
           
          <div id="second-wrapper">
          <div id="point" class="mb-5">
-         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3">고르기</button>
+         <button type="button" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#tagModal">
+			고르기
+		 </button>
          <div class="form-control my-2" id="personal-point" placeholder="어떤 사람을 선호하나요?">
 
 
@@ -205,7 +209,9 @@
               </ul>
 
             </div> 
-         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3 mt-4">고르기</button>
+         <button type="button" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#tagModal">
+			고르기
+		 </button>
          
          <div class="form-control my-2" id="team-point" placeholder="이 모임은 어떤 특성을 가지고 있나요?">
           <ul>
@@ -230,7 +236,27 @@
          </form>        
               </div>
              
-        
+        <!-- 태그 선택을 위한 모달창 -->
+        <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">이 모임의 개성을 선택해 봐요!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- 본문 종료 -->
 		<!-- footer 분리 -->
@@ -243,5 +269,8 @@
 		<div th:replace="~{scripts/scripts::scripts}"></div>
     
     </body>
+    
+    <!-- createMeeting의 자바스크립트 파일추가 -->
+    <script th:src="@{/js/createMeeting.js}"></script>
 
 </html>
