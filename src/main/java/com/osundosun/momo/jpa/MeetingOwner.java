@@ -1,4 +1,4 @@
-package jisunJpa;
+package com.osundosun.momo.jpa;
 
 import java.sql.Timestamp;
 

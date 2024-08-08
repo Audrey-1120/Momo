@@ -80,6 +80,11 @@
     color:white;;
   }
   
+  .selected {
+    background-color: yellowgreen;
+    font-weight: bold; /* 글자 두껍게 */
+}
+  
   #location-pay > div {
   margin-bottom: 50px;
   padding-bottom: 50px;
@@ -194,33 +199,25 @@
           
          <div id="second-wrapper">
          <div id="point" class="mb-5">
-         <button type="button" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#tagModal">
-			고르기
+         <button type="button" id="personal-btn" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#personmodal">
+			어떤 사람들과 만나고 싶나요?
 		 </button>
-         <div class="form-control my-2" id="personal-point" placeholder="어떤 사람을 선호하나요?">
+         <div class="form-control my-2">
 
 
-              <ul>
-                <li>말없어요</a></li>
-                <li>INSP</a></li>
-                <li>귀가는 각자</a></li>
-                <li>커피 좋아요</a></li>
-                <li>술 안마셔요</a></li>
+              <ul id="personal-tag">
+                
               </ul>
 
             </div> 
-         <button type="button" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#tagModal">
-			고르기
+         <button type="button" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#teammodal">
+		   이 모임은 어떤 특징이 있나요?
 		 </button>
          
          <div class="form-control my-2" id="team-point" placeholder="이 모임은 어떤 특성을 가지고 있나요?">
-          <ul>
-                <li>말없어요</a></li>
-                <li>INSP</a></li>
-                <li>귀가는 각자</a></li>
-                <li>커피 좋아요</a></li>
-                <li>술 안마셔요</a></li>
-              </ul>
+          <ul id="team-tag">
+                <li>낙천적</li>
+          </ul>
               </div>
          </div> 
          
@@ -239,8 +236,27 @@
         <!-- 태그 선택을 위한 모달창 -->
         <!-- Button trigger modal -->
 
-<!-- Modal -->
-<div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 개인 특성을 위한 Modal -->
+<div class="modal fade" id="personmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">어울리고 싶은 사람의 특성을 골라봐요!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="personal-point"></ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" id="person-choice-btn" class="btn btn-primary">선택완료</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 모임 특성을 위한 Modal -->
+<div class="modal fade" id="teammodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -248,11 +264,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <ul id="team-point"></ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" id="team-choice-btn" class="btn btn-primary">선택완료</button>
       </div>
     </div>
   </div>
