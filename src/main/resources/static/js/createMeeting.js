@@ -17,15 +17,21 @@ const fnGetTagList = () => {
 			console.log(resData);
             const tagList = resData.tagList; 
             const ulperson = document.getElementById('personal-point');
-            //const ulteam = document.getElementById('team-point');
+            const ulteam = document.getElementById('team-point');
 
             tagList.forEach(tag => {
-                let li = document.createElement('li'); 
-                li.textContent = tag.tagName; 
-                li.setAttribute('data-tag-no', tag.tagNo);
-                ulperson.appendChild(li); //
-               // ulteam.appendChild(li); //
-            });		
+                let person = document.createElement('li'); 
+                let team = document.createElement('li'); 
+                person.textContent = tag.tagName; 
+                person.setAttribute('data-tag-no', tag.tagNo);
+                team.textContent = tag.tagName; 
+                team.setAttribute('data-tag-no', tag.tagNo);
+                
+                ulperson.appendChild(person); 
+                ulteam.appendChild(team); 
+            });
+            
+				
 		 })
 		  .catch(error => {
             console.error('Fetch 오류:', error);
@@ -34,6 +40,7 @@ const fnGetTagList = () => {
 
 // 모달에서 태그 선택시 변수에 저장해 놓음
 var personChoice = [];
+var teamChoice= [];
  $('#personal-point').on('click', 'li', function() {
 	// 관건 -> no 나 name 둘 중 하나가 아니라 두개 모두 계속 같이 가야함. 화면에 표시될떄 name 데이터는 no
                 const tagNo = $(this).data('tag-no'); // data-tag-no 값 가져오기
@@ -51,8 +58,22 @@ var personChoice = [];
                 }
                 return;
             });
+            
+ $('#team-point').on('click', 'li', function() {
+                const tagNo = $(this).data('tag-no'); 
+                const tagName = $(this).text();
+                const index = teamChoice.findIndex(item => item.tagNo === tagNo && item.tagName === tagName);
+                if (index > -1) {
+                    teamChoice.splice(index, 1);
+                    $(this).removeClass('selected');
+                } else {
+                    teamChoice.push({tagNo, tagName});
+                    $(this).addClass('selected');
+                }
+                return;
+            });
 
-// 변수에 저장해놓은 태그들을 div box에 추가함
+// 변수에 저장해놓은 태그들을 div에 추가함
   $(document).on('click', '#person-choice-btn', function() {
     const $personTagUl = $('#personal-tag'); 
     $personTagUl.empty();
@@ -63,7 +84,17 @@ var personChoice = [];
     });
         $('#personmodal').modal('hide');
 });
-     
+
+  $(document).on('click', '#team-choice-btn', function() {
+    const $teamTagUl = $('#team-tag'); 
+    $teamTagUl.empty();
+    personChoice.forEach(i => {
+        let li = $('<li>').text(i.tagName).attr('data-tag-no', i.tagNo); 
+        $teamTagUl.append(li); 
+        console.log('클릭');
+    });
+        $('#teammodal').modal('hide');
+});     
 
      
   
