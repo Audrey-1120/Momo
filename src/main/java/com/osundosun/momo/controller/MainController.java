@@ -8,7 +8,7 @@ public class MainController {
   
   @GetMapping("/index.html")
   public String index() {
-    return "admin/adminUser";
+    return "index";
   }
   
   @GetMapping("/shop.html")
