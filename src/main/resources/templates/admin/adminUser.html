@@ -7,7 +7,7 @@
     <head th:replace="~{/stylesheets/head :: head (title='관리자페이지')}"></head>
     
    	<!-- css 파일 적용 -->
-	<link href="css/admin/admin.css" rel="stylesheet">
+	<link href="/css/admin/admin.css" rel="stylesheet">
     
   <body>
 
@@ -27,15 +27,16 @@
                       <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Momo@momoclub.com</a></small>
                     </div>
                     <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                        <a href="#" class="text-white">
+                          <small class="text-white mx-2" th:if="${session.member != null}" th:text="${session.member.nickName}">Privacy Policy</small>
+                          <small class="text-white me-2">님 반갑습니다!</small>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="/index.html" class="navbar-brand"><img src="img/momo-logo2.png" style="width: 130px; height: 70px;"></a>
+                    <a href="/index.html" class="navbar-brand"><img src="/img/momo-logo2.png" style="width: 130px; height: 70px;"></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -415,7 +416,7 @@
                         <div class="col-md-12 col-lg-6 col-xl-4">
                         	<h3>상세보기</h3>
                         	<div class="form-item d-flex justify-content-center align-items-center">
-                                <img src="img/vegetable-item-3.png" class="img-fluid rounded-circle" style="width: 80px;height: 80px;" alt="">
+                                <img src="/img/vegetable-item-3.png" class="img-fluid rounded-circle" style="width: 80px;height: 80px;" alt="">
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-lg-6">

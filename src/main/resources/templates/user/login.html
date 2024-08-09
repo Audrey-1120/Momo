@@ -7,7 +7,7 @@
     <head th:replace="~{/stylesheets/head :: head (title='로그인')}"></head>
 
 	<!-- css 파일 적용 -->
-	<link href="css/user/login.css" rel="stylesheet">
+	<link href="/css/user/login.css" rel="stylesheet">
 	
     <body>
 
@@ -45,13 +45,10 @@
             <h1 class="text-center text-white display-6">로그인</h1>
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="#" style="color: white;">홈</a></li>
-                <li class="breadcrumb-item"><a href="#" style="color: white;">Pages</a></li>
-                <li class="breadcrumb-item active text-white">로그인</li>
+                <li class="breadcrumb-item active text-white"><a href="/admin/adminLogin.page" style="color: white;">관리자 로그인</a></li>
             </ol>
         </div>
         <!-- Single Page Header End -->
-
-
 
         
         <!-- Tastimonial Start -->
@@ -71,7 +68,7 @@
                             </div>
                             <div class="d-flex align-items-center flex-nowrap">
                                 <div class="bg-secondary rounded">
-                                    <img src="img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                                    <img src="/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                                 </div>
                                 <div class="ms-4 d-block">
                                     <h4 class="text-dark">박등산</h4>
@@ -96,7 +93,7 @@
                             </div>
                             <div class="d-flex align-items-center flex-nowrap">
                                 <div class="bg-secondary rounded">
-                                    <img src="img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                                    <img src="/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                                 </div>
                                 <div class="ms-4 d-block">
                                     <h4 class="text-dark">아이러브커피</h4>
@@ -121,7 +118,7 @@
                             </div>
                             <div class="d-flex align-items-center flex-nowrap">
                                 <div class="bg-secondary rounded">
-                                    <img src="img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                                    <img src="/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                                 </div>
                                 <div class="ms-4 d-block">
                                     <h4 class="text-dark">헬스왕</h4>
@@ -144,8 +141,8 @@
         
         <!-- 로그인 로고(카카오, 네이버) -->
         <div class="login-logo">
-	      <img src="img/naver-logo.png" class="naver-logo" alt="">
-	      <img src="img/kakao-logo.png" class="kakao-logo" alt="">
+	      <img src="/img/naver-logo.png" class="naver-logo" alt="">
+	      <img src="/img/kakao-logo.png" class="kakao-logo" alt="">
         </div>
 
 		<!-- footer 분리 -->
