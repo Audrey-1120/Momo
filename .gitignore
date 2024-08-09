@@ -187,4 +187,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# naver.properties 파일 무시
+naver.properties
+
+
+
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,eclipse,maven,git
