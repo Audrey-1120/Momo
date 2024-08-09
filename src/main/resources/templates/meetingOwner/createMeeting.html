@@ -80,6 +80,11 @@
     color:white;;
   }
   
+  .selected {
+    background-color: yellowgreen;
+    font-weight: bold; /* 글자 두껍게 */
+}
+  
   #location-pay > div {
   margin-bottom: 50px;
   padding-bottom: 50px;
@@ -158,8 +163,10 @@
         <!-- 본문 시작 -->
            <div>
               
-            
-           <form action="">
+            <!-- 타임리프의 경우 별도의 contextPath 설정이 필요없이 바로 사용할 수 있다. @{} -->
+           <form action="@{/createMeeting.do}"
+                 id="frm"
+                 method="POST">
            <div id="whole-wrapper">
            <div id="first-wrapper">
            <div id="phto-name-wrapper" class="d-flex align-items-end">
@@ -192,29 +199,25 @@
           
          <div id="second-wrapper">
          <div id="point" class="mb-5">
-         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3">고르기</button>
-         <div class="form-control my-2" id="personal-point" placeholder="어떤 사람을 선호하나요?">
+         <button type="button" id="personal-btn" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#personmodal">
+			어떤 사람들과 만나고 싶나요?
+		 </button>
+         <div class="form-control my-2">
 
 
-              <ul>
-                <li>말없어요</a></li>
-                <li>INSP</a></li>
-                <li>귀가는 각자</a></li>
-                <li>커피 좋아요</a></li>
-                <li>술 안마셔요</a></li>
+              <ul id="personal-tag">
+                
               </ul>
 
             </div> 
-         <button class="btn border border-secondary text-primary rounded-pill py-2 px-3 mt-4">고르기</button>
+         <button type="button" class="btn border border-secondary text-primary rounded-pill py-2 px-3" data-bs-toggle="modal" data-bs-target="#teammodal">
+		   이 모임은 어떤 특징이 있나요?
+		 </button>
          
-         <div class="form-control my-2" id="team-point" placeholder="이 모임은 어떤 특성을 가지고 있나요?">
-          <ul>
-                <li>말없어요</a></li>
-                <li>INSP</a></li>
-                <li>귀가는 각자</a></li>
-                <li>커피 좋아요</a></li>
-                <li>술 안마셔요</a></li>
-              </ul>
+         <div class="form-control my-2">
+          <ul id="team-tag">
+          
+          </ul>
               </div>
          </div> 
          
@@ -230,7 +233,46 @@
          </form>        
               </div>
              
-        
+        <!-- 태그 선택을 위한 모달창 -->
+        <!-- Button trigger modal -->
+
+<!-- 개인 특성을 위한 Modal -->
+<div class="modal fade" id="personmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">어울리고 싶은 사람의 특성을 골라봐요!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="personal-point"></ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" id="person-choice-btn" class="btn btn-primary">선택완료</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 모임 특성을 위한 Modal -->
+<div class="modal fade" id="teammodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">이 모임의 개성을 선택해 봐요!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="team-point"></ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" id="team-choice-btn" class="btn btn-primary">선택완료</button>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- 본문 종료 -->
 		<!-- footer 분리 -->
@@ -243,5 +285,8 @@
 		<div th:replace="~{scripts/scripts::scripts}"></div>
     
     </body>
+    
+    <!-- createMeeting의 자바스크립트 파일추가 -->
+    <script th:src="@{/js/createMeeting.js}"></script>
 
 </html>
