@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.osundosun.momo.jpa.TagRepository;
+import com.osundosun.momo.repository.TagRepository;
 
 @Service
 public class MeetService {
