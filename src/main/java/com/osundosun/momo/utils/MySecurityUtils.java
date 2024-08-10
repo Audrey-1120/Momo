@@ -2,6 +2,9 @@ package com.osundosun.momo.utils;
 
 import java.security.MessageDigest;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MySecurityUtils {
   
   public static String getSha256(String original) {
@@ -17,6 +20,10 @@ public class MySecurityUtils {
       e.printStackTrace();
     }
     return builder.toString();
+  }
+  
+  public static String getPreventXss(String original) {
+    return original.replace("<script>", "&lt;script&gt;").replace("</script>", "&lt;/script&gt;");
   }
 
 }

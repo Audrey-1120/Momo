@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko"	  
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- <head>태그 내 공통된 stylesheets 분리 -->
+    <head th:replace="~{/stylesheets/head :: head (title='로그인')}"></head>
+
+	<!-- css 파일 적용 -->
+	<link href="/css/user/login.css" rel="stylesheet">
+	
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- 헤더 레이아웃 분리 -->
+        <header th:replace="~{/layout/header::header}"></header>
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+
+        <!-- Single Page Header start -->
+         <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">마이페이지</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#" style="color: white;">홈</a></li>
+                <li class="breadcrumb-item active text-white"><a href="/admin/adminLogin.page" style="color: white;">관리자 로그인</a></li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+        
+        <!-- Checkout Page Start -->
+		<div class="container-fluid testimonial py-5">
+		  <div class="container py-5" style="max-width: 50rem;">
+		    <h4 class="mb-4">내 정보 수정</h4>
+		    <form action="#">
+		      <div class="row">
+		        <div class="col-md-12 col-lg-6">
+		          <div class="form-item w-100">
+		            <label class="form-label my-3">First Name<sup>*</sup></label>
+		            <input type="text" class="form-control">
+		          </div>
+		        </div>
+		        <div class="col-md-12 col-lg-6">
+		          <div class="form-item w-100">
+		            <label class="form-label my-3">Last Name<sup>*</sup></label>
+		            <input type="text" class="form-control">
+		          </div>
+		        </div>
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Company Name<sup>*</sup></label>
+		        <input type="text" class="form-control">
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Address <sup>*</sup></label>
+		        <input type="text" class="form-control" placeholder="House Number Street Name">
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Town/City<sup>*</sup></label>
+		        <input type="text" class="form-control">
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Country<sup>*</sup></label>
+		        <input type="text" class="form-control">
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Postcode/Zip<sup>*</sup></label>
+		        <input type="text" class="form-control">
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Mobile<sup>*</sup></label>
+		        <input type="tel" class="form-control">
+		      </div>
+		      <div class="form-item">
+		        <label class="form-label my-3">Email Address<sup>*</sup></label>
+		        <input type="email" class="form-control">
+		      </div>
+		      <div class="form-check my-3">
+		        <input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts">
+		        <label class="form-check-label" for="Account-1">Create an account?</label>
+		      </div>
+		      <hr>
+		      <div class="form-check my-3">
+		        <input class="form-check-input" type="checkbox" id="Address-1" name="Address" value="Address">
+		        <label class="form-check-label" for="Address-1">Ship to a different address?</label>
+		      </div>
+		      <div class="form-item">
+		        <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="Oreder Notes (Optional)"></textarea>
+		      </div>
+		      <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+		        <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
+		      </div> <!-- 이 div 닫는 태그 추가됨 -->
+		    </form>
+		  </div>
+		</div>
+
+        
+        
+        
+        
+        <div class="container-fluid testimonial py-5">
+            <div class="container py-5">
+
+
+            </div>
+        </div>
+        <!-- Checkout Page End -->
+        
+
+		<!-- footer 분리 -->
+		<footer th:replace="~{/layout/footer::footer}"></footer>
+		
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        <!-- 공통된 javascript 파일 분리 -->
+		<div th:replace="~{/scripts/scripts::scripts}"></div>
+		
+    </body>
+	
+	<script>
+	  const pageHeader = $('.page-header');
+	  pageHeader.css('backgroundImage', 'none');
+	  pageHeader.css('background-color', '#81C408');
+	</script>
+
+</html>

@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MemberDto {
 
-  int memberNo, signupKind, tagNo, role;
-  String email, pw, name, nickname, mobile, gender, profilePath;
+  int memberNo, signupKind, role;
+  String email, pw, name, nickName, mobile, gender, profilePath, tagNo;
   Timestamp signupDate;
   
 }

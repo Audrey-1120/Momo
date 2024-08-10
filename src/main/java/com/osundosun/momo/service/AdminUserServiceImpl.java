@@ -1,9 +1,7 @@
 package com.osundosun.momo.service;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +11,6 @@ import com.osundosun.momo.repository.AdminUserRepository;
 import com.osundosun.momo.utils.MySecurityUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -81,23 +78,22 @@ public class AdminUserServiceImpl implements AdminUserService {
   
   
     // MemberEntity -> MemberDto 객체로 변환
-    private MemberDto toMemberDto(MemberEntity memberEntity) {
-      MemberDto memberDto = MemberDto.builder()
-                                .memberNo(memberEntity.getMemberNo())
-                                .email(memberEntity.getEmail())
-                                .pw(memberEntity.getPw())
-                                .name(memberEntity.getName())
-                                .nickname(memberEntity.getNickName())
-                                .mobile(memberEntity.getMobile())
-                                .gender(memberEntity.getGender())
-                                .profilePath(memberEntity.getProfilePath() != null ? memberEntity.getProfilePath() : "default")
-                                .signupKind(memberEntity.getSignupKind())
-                                .signupDate(memberEntity.getSignupDate())
-                                .tagNo(memberEntity.getTagNo() != null ? memberEntity.getTagNo() : 0)
-                                .role(memberEntity.getRole())
-                             .build();
-      
-      return memberDto;
-    }
+  private MemberDto toMemberDto(MemberEntity memberEntity) {
+    
+    MemberDto memberDto = new MemberDto();
+    memberDto.setMemberNo(memberEntity.getMemberNo());
+    memberDto.setEmail(memberEntity.getEmail());
+    memberDto.setPw(memberEntity.getPw());
+    memberDto.setName(memberEntity.getName());
+    memberDto.setNickName(memberEntity.getNickName());
+    memberDto.setMobile(memberEntity.getMobile());
+    memberDto.setGender(memberEntity.getGender());
+    memberDto.setProfilePath(memberEntity.getProfilePath());
+    memberDto.setSignupKind(memberEntity.getSignupKind());
+    memberDto.setSignupDate(memberEntity.getSignupDate());
+    memberDto.setTagNo(memberEntity.getTagNo());
+    memberDto.setRole(memberEntity.getRole());
+    return memberDto;
+  }
   }
 

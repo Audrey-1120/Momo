@@ -2,6 +2,8 @@ package com.osundosun.momo.entity;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,18 +47,19 @@ public class MemberEntity {
   @Column(name = "SIGNUP_KIND", nullable = false)
   private Integer signupKind;
 
+  @CreationTimestamp
   @Column(name = "SIGNUP_DATE", nullable = false)
   private Timestamp signupDate;
 
   @Column(name = "TAG_NO")
-  private Integer tagNo;
+  private String tagNo;
   
   @Column(name = "ROLE")
   private Integer role;
   
   public MemberEntity() {}
 
-  public MemberEntity(String email, String password, String name, String nickname, String mobile, String gender, String profilePath, Integer signupKind, Timestamp signupDate, Integer tagNo) {
+  public MemberEntity(String email, String password, String name, String nickname, String mobile, String gender, String profilePath, Integer signupKind, Timestamp signupDate, String tagNo) {
     this.email = email;
     this.pw = password;
     this.name = name;
@@ -68,6 +71,5 @@ public class MemberEntity {
     this.signupDate = signupDate;
     this.tagNo = tagNo;
 }
-  
   
 }

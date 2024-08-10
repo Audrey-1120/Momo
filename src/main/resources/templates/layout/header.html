@@ -10,13 +10,16 @@
         <div class="container topbar bg-primary d-none d-lg-block">
             <div class="d-flex justify-content-between">
                 <div class="top-info ps-2">
-                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">서울시 중랑구 여월동 56-1</a></small>
+                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">서울시 중낭구 여울동 56-1</a></small>
                     <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Momo@momoclub.com</a></small>
                 </div>
                 <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">F&Q 게시판</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                  <a href="#" class="text-white">
+                    <small class="text-white mx-2" th:if="${session.member != null}" th:text="${session.member.nickName}">Privacy Policy</small>
+                    <small class="text-white me-2" th:if="${session.member != null}" >님 반갑습니다!</small>
+                    <!-- <img class="img" th:src="${session.member != null ? session.member.profilePath : '/img/default_profile_image.png'}" style="width: 20px;height: 20px;border-radius: 50%;object-fit: contain;"> -->
+                  </a>
+                  <a href="/member/signout.do" class="text-white"><small class="text-white me-2" th:if="${session.member != null}">로그아웃</small></a>
                 </div>
             </div>
         </div>
