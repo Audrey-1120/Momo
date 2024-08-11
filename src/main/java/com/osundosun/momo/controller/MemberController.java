@@ -33,12 +33,14 @@ public class MemberController {
     return "user/login";
   }
   
+  // 접근 토큰 발급
   @GetMapping("/naver/getAccessToken.do")
   public String getAccessToken(HttpServletRequest request) {
     String accessToken = memberService.getNaverLoginAccessToken(request);
     return "redirect:/member/naver/getProfile.do?accessToken=" + accessToken;
   }
   
+  // 네이버로부터 프로필 정보 받아오기
   @GetMapping("/naver/getProfile.do")
   public String getProfile(HttpServletRequest request, Model model) {
     
@@ -48,14 +50,14 @@ public class MemberController {
     // 반환 경로 초기화
     String path = null;
     
-    // 받은 프로필 정보가 member_t에 있는 확인한다. (hasUser)
+    // 받은 프로필 정보가 member_t에 있는지 확인한다. (hasUser)
     if(memberService.hasUser(member.getEmail())) {
-      // 1. 데이터가 있을 경우 naverSignin으로 이동
+      // 1. 데이터가 있을 경우 로그인 시킨다.
       memberService.naverLogin(request, member);
       path = "redirect:/index.html";
       
     } else {
-     // 2. 데이터가 없을 경우 네이버 가입 화면으로 이동한다. (naverSignup.html)
+     // 2. 데이터가 없을 경우 회원가입 화면으로 이동한다. (naverSignup.html)
       model.addAttribute("member", member);
       path = "user/naverSignup";
     }
@@ -66,8 +68,7 @@ public class MemberController {
   @PostMapping("/naver/naverSignup.do")
   public String naverSignup(MultipartHttpServletRequest multipartRequest, RedirectAttributes redirectAttributes) {
     
-    // 1. naverSignup 폼에서 제출한 데이터들을 request로 받아서 서비스에서 회원가입 처리!
-    // 2. 회원가입 후 main으로 이동!
+    // naverSignup 폼에서 제출한 데이터들을 request로 받아서 서비스에서 회원가입 처리한다.
     String result = memberService.naverSignup(multipartRequest).get("status").toString();
     
     if(result.equals("success")) {

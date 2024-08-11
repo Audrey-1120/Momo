@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en"	  
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- <head>태그 내 공통된 stylesheets 분리 -->
+    <head th:replace="~{stylesheets/head :: head (title='Momo 모임 전체보기')}"></head>
+    
+    <!-- css 파일 적용 -->
+    <link href="/css/meeting/meetingInquiry.css" rel="stylesheet">
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- 헤더 레이아웃 분리 -->
+        <header th:replace="~{layout/header::header}"></header>
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="#applyMeetingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+        
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">모임 조회</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#" style="color: white;">홈</a></li>
+                <li class="breadcrumb-item"><a href="#" style="color: white;">Pages</a></li>
+                <li class="breadcrumb-item active text-white">로그인</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->        
+        
+        <!-- Fruits Shop Start-->
+        <div class="container-fluid fruite py-5">
+            <div class="container py-5">
+                <h1 class="mb-4">다양한 모임을 만나보세요🐱</h1>
+                <div class="row g-4">
+                    <div class="col-lg-12">
+                        <div class="row g-4">
+                            <div class="col-xl-3">
+                                <div class="input-group w-100 mx-auto d-flex">
+                                    <input type="search" class="form-control p-3" placeholder="모임명을 검색해보세요" aria-describedby="search-icon-1">
+                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-6"></div>
+                            <div class="col-xl-3">
+                                <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                                    <label for="fruits">최신순</label>
+                                    <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
+                                        <option value="saab">인기순</option>
+                                        <option value="opel">최신순</option>
+                                        <option value="volvo">인원미달</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-3">
+                                <div class="row g-4">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h4>카테고리</h4>
+                                            <ul class="list-unstyled fruite-categorie">
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name major-category">
+                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>독서</a>
+                                                        <span>(3)</span>
+                                                    </div>
+                                                    <ul class="fruite-categorie middle-category" style="display: none;">
+	                                                  <li>
+	                                                  	<div class="d-flex justify-content-between fruite-name middle-item">
+	                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>소설</a>
+	                                                        <span>(3)</span>
+	                                                    </div>
+	                                                    <ul class="fruite-categorie small-category" style="display: none;">
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>공포</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>로맨스</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>미스터리</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>판타지</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>과학소설(SF)</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                    </ul>
+	                                                  </li>
+	                                                  <li>
+	                                                  	<div class="d-flex justify-content-between fruite-name middle-item">
+	                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>비소설</a>
+	                                                        <span>(3)</span>
+	                                                    </div>
+	                                                  </li>	                                                  
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name major-category">
+                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>스포츠&레저</a>
+                                                        <span>(3)</span>
+                                                    </div>
+                                                    <ul class="fruite-categorie middle-category" style="display: none;">
+	                                                  <li>
+	                                                  	<div class="d-flex justify-content-between fruite-name middle-item">
+	                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>운동</a>
+	                                                        <span>(3)</span>
+	                                                    </div>
+	                                                    <ul class="fruite-categorie small-category" style="display: none;">
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>축구</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>농구</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>배드민턴</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>테니스</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>요가</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                    </ul>
+	                                                  </li>
+	                                                  <li>
+	                                                  	<div class="d-flex justify-content-between fruite-name middle-item">
+	                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>레저</a>
+	                                                        <span>(3)</span>
+	                                                    </div>
+	                                                    <ul class="fruite-categorie small-category" style="display: none;">
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>등산</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>낚시</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>캠핑</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>사이클링</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                      <li>
+		                                                  	<div class="d-flex justify-content-between fruite-name">
+		                                                        <a href="#" onclick="return false;"><i class="fas fa-apple-alt me-2"></i>스키/스노보드</a>
+		                                                        <span>(3)</span>
+		                                                    </div>
+	                                                      </li>	                                                      
+	                                                    </ul>	                                                    
+	                                                  </li>	                                                  
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row g-4 justify-content-center">
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;" th:if="${meeting!= null}" th:text="${session.member.nickName}">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item" style="height:auto;">
+                                            <div class="fruite-img">
+                                                <img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">독서</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>등산조아모임</h4>
+                                                <p class="m-auto">현재 인원 수: <span style="color: orange;">3</span>/5</p>
+                                                <div class="form-control my-2 tag-form" style="background-color: white;">
+										          <ul id="personal-tag" class="ps-0">
+										            <li>#등산애호가</li>
+										            <li>#평일에만만나요</li>
+										            <li>#운동안좋아하면NO</li>
+										            <li>#기본태그</li>
+										          </ul>
+										        </div>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="pagination d-flex justify-content-center mt-5">
+                                            <a href="#" class="rounded">&laquo;</a>
+                                            <a href="#" class="active rounded">1</a>
+                                            <a href="#" class="rounded">2</a>
+                                            <a href="#" class="rounded">3</a>
+                                            <a href="#" class="rounded">4</a>
+                                            <a href="#" class="rounded">5</a>
+                                            <a href="#" class="rounded">6</a>
+                                            <a href="#" class="rounded">&raquo;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fruits Shop End-->
+        
+        
+		<!-- footer 분리 -->
+		<footer th:replace="~{layout/footer::footer}"></footer>
+
+    	<!-- Back to Top -->
+    	<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+        
+    	<!-- 공통된 javascript 파일 분리 -->
+		<div th:replace="~{scripts/scripts::scripts}"></div>
+		
+		<!-- meetingInquiry.js 파일 분리 -->
+	    <script th:src="@{/js/meetingInquiry.js}"></script>
+    
+    </body>
+
+</html>

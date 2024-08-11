@@ -47,6 +47,14 @@ public class MeetController {
     //여기서 서비스 이어주기. 될랑가 된다!
     return meetService.getTagList();
   }
+  
+  // ------ 채원 -----
+  // 모임 전체 조회 페이지 이동
+  @GetMapping("/meetingInquiry.page")
+  public String meetingInquiry() {
+    return "meeting/meetingInquiry";
+  }
+  
  
 }  
   

@@ -240,8 +240,6 @@ public class MemberServiceImpl implements MemberService {
       } else {
         profilePath = myFileUtils.setProfilePicture(multipartRequest, "profileImage");
       }
-        
-        
       
       // DB에 저장할 회원 데이터 생성
       MemberEntity member = new MemberEntity();
@@ -283,13 +281,6 @@ public class MemberServiceImpl implements MemberService {
       e.printStackTrace();
     }
   }
-  
-  
-  
-  
-  
-  
-  
   
   // MemberEntity -> MemberDto 객체로 변환
   private MemberDto toMemberDto(MemberEntity memberEntity) {

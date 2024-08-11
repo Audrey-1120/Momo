@@ -32,8 +32,6 @@ const fnGetTagList = () => {
                 person.setAttribute('data-tag-no', tag.tagNo);
                 ulperson.appendChild(person); 
             });
-            
-				
 		 })
 		  .catch(error => {
             console.error('Fetch 오류:', error);
@@ -187,7 +185,7 @@ const fnCheckTag = () => {
 const fnNaverSignup = () => {
   $('#frm-naverSignup').on('submit', (evt) => {
 	
-	// 프로필 이미지 설정하지 않았을 때
+	// 프로필 이미지 기본인지 변경했는지 체크
 	let profileImageInput = $('#profileImageInput');
 	if(!profileImageInput.files.length) {
 	  profileImageInput.name = "";
