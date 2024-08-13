@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 public class PageDto<T> {
   
   private List<T> contents;
-  private int page;
-  private int size;
-  private long total;
+  private int currentPage;
+  private long totalPage;
+  private long beginPage;
+  private long endPage;
   
 }

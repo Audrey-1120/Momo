@@ -96,6 +96,101 @@ const fnGetCategory = () => {
   })
 }
 
+const fnGetMeetingList = (page) => {
+  
+  fetch('/getMeetingList.do?page=' + page + '&size=' + 9)
+  	.then(response => response.json())
+  	.then(resData => {
+
+	  console.log(resData);
+
+	  // 모임 데이터 추가할 부분 및 모임 데이터	  
+	  let meetingContainer = $('.meeting-form');
+	  let meetingList = resData.contents;
+	  
+	  // 페이지네이션을 위한 페이지들
+	  let currentPage = resData.currentPage;
+	  let totalPage = resData.totalPage;
+	  let beginPage = resData.beginPage;
+	  let endPage = resData.endPage;
+	  
+	  // 화면 비워주기
+	  $('.meetings').remove();
+	  
+	  // 모임 추가하기
+	  meetingList.forEach(function(meeting) {
+		let msg = '<div class="col-md-6 col-lg-6 col-xl-4 meetings" data-meeting-no="' + meeting.meetingNo + '">';
+		msg += '<div class="rounded position-relative fruite-item" style="height:auto;">';
+		msg += '<div class="fruite-img">';
+		msg += '<img src="img/등산.jpg" class="img-fluid w-100 rounded-top" alt="" style="height: 205px;">';
+		msg += '</div>';
+		msg += '<div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">임시카테..</div>';
+		msg += '<div class="p-4 border border-secondary border-top-0 rounded-bottom">';
+		msg += '<h4>' + meeting.meetingTitle + '</h4>';
+		msg += '<p class="m-auto">현재 인원 수: <span style="color: orange;">' + meeting.participantsCount + '</span>/' + meeting.capacity + '</p>';
+		msg += '<div class="form-control my-2 tag-form" style="background-color: white;">';
+		msg += '<ul id="personal-tag" class="ps-0">';
+		
+		// 이 사이에 태그 추가해주기!!!!
+		
+		msg += '</ul>';
+		msg += '</div>';
+		msg += '<div class="d-flex justify-content-between flex-lg-wrap">';
+		msg += '<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">가입신청</a>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		
+		meetingContainer.append(msg);
+	  })
+	  
+	  // 페이지네이션 함수 호출
+	  fnGetPaging(currentPage, totalPage, beginPage, endPage);
+	})
+}
+
+// 페이지네이션
+const fnGetPaging = (currentPage, totalPage, beginPage, endPage) => {
+  
+  // 페이징 추가할 부분 가져오기
+  let pagingContainer = $('.meeting-form');
+  let paging = '<div class="col-12 pagination-form">';
+  paging += '<div class="pagination d-flex justify-content-center mt-5">';
+  
+  if(beginPage === 1) {
+    paging += '<a href="javascript:void(0);" onclick="return false;" class="rounded">&laquo;</a>';
+  } else {
+    paging += '<a href="javascript:void(0);" onclick="fnGetMeetingList(' + (beginPage - 1) + ')" class="rounded">&laquo;</a>';
+  }
+  
+  for(let i = beginPage; i <= endPage; i++) {
+	if(i === currentPage + 1) {
+	  paging += '<a href="javascript:void(0);" onclick="fnGetMeetingList(' + i + ')" class="active rounded">' + i + '</a>';
+	} else {
+	  paging += '<a href="javascript:void(0);" onclick="fnGetMeetingList(' + i + ')" class="rounded">' + i + '</a>';
+	}
+  }
+  
+  if(endPage === totalPage) {
+	paging += '<a href="javascript:void(0);" onclick="return false;" class="rounded">&raquo;</a>';
+  } else {
+	paging += '<a href="javascript:void(0);" onclick="fnGetMeetingList(' + (endPage - 1) + ')" class="rounded">&raquo;</a>';
+  }
+  
+  paging += '</div>';
+  paging += '</div>';
+  
+  // 페이징 추가하기 전에 원래 요소 삭제
+  $('.pagination-form').remove();
+  
+  // 패이징 설정
+  pagingContainer.append(paging);
+  
+}
+
+
+
 
 
 
@@ -105,3 +200,4 @@ const fnGetCategory = () => {
 fnPageHeader();
 fnCategoryClick();
 fnGetCategory();
+fnGetMeetingList(1);

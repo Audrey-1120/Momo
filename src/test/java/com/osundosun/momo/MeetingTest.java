@@ -58,7 +58,7 @@ public class MeetingTest {
         })
         .collect(Collectors.toList());
     
-    PageDto<MeetingDto> meetingDtoPage = new PageDto<MeetingDto>(meetingList, results.getNumber(), results.getSize(), results.getTotalElements());
+    PageDto<MeetingDto> meetingDtoPage = new PageDto<MeetingDto>(meetingList, results.getNumber(), results.getSize(), results.getTotalElements(), results.getTotalPages());
     System.out.println("---끝났습니다---");
   }
   

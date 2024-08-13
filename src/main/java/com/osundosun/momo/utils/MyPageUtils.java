@@ -8,17 +8,35 @@ import lombok.Data;
 @Data
 public class MyPageUtils {
 
-  private int total;
+  private long total;
   // 스프링에서 지원하는 Pageable 인터페이스에서는 display 대신 size를 쓴다.
-  private int size;
-  private int page;
-  private int begin;
-  private int end;
+  private long size;
+  private long page;
+  private long begin;
+  private long end;
   
-  private int pagePerBlock = 6;
-  private int totalPage;
-  private int beginPage;
-  private int endPage;
+  private long pagePerBlock = 6;
+  private long totalPage;
+  private long beginPage;
+  private long endPage;
+  
+  public void setPaging(long total, long size, long page) {
+    
+    // total, size, page 값 채워주기
+    this.total = total;
+    this.size = size;
+    this.page = page;
+    
+    begin = (page - 1) * size + 1;
+    end = begin + size - 1;
+    
+    totalPage = (long) Math.ceil((double)total/size);
+    
+    beginPage = ((page - 1) / pagePerBlock * pagePerBlock + 1);
+    endPage = Math.min(totalPage, beginPage + pagePerBlock - 1);
+    
+  }
+  
   
   public String getPaging(String requestURI, String sort, int size) {
     
@@ -28,10 +46,11 @@ public class MyPageUtils {
     if(beginPage == 1) {
       builder.append("<a href=\"#\" onclick=\"return false;\" class=\"rounded\">&laquo;</a>");
     } else {
-      builder.append("<a href=\"#\" class=\"active rounded\">1</a>");
+      builder.append("<a href=\"\"" + requestURI + "?page=" + (beginPage - 1) + "&sort=" + sort + "&size=" + size + "\">&laquo;</a>");
     }
+    
      // 1 2 3 4 5 6
-    for(int p = beginPage; p <= endPage; p++) {
+    for(long p = beginPage; p <= endPage; p++) {
       if(p == page) {
         builder.append("<a href=\"" + requestURI + "/?page=" + p + "&sort=" + sort + "&size=" + size + "\" class=\"active rounded\">" + p + "</a>");
       } else {
@@ -43,7 +62,7 @@ public class MyPageUtils {
     if(endPage == totalPage) {
       builder.append("<a href=\"#\" onclick=\"return false;\" class=\"rounded\">&raquo;</a>");
     } else {
-      
+      builder.append("<a href=\"#\"" + requestURI + "?page=" + (endPage - 1) + "&sort=" + sort + "&size=" + size + "\">&raquo;</a>");
     }
     
     return builder.toString();

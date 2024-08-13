@@ -22,6 +22,7 @@ import com.osundosun.momo.entity.MeetingOwner;
 import com.osundosun.momo.repository.CateRepository;
 import com.osundosun.momo.repository.MeetingOwnerRepository;
 import com.osundosun.momo.repository.TagRepository;
+import com.osundosun.momo.utils.MyPageUtils;
 
 @Service
 public class MeetService {
@@ -34,6 +35,9 @@ public class MeetService {
   
   @Autowired
   private MeetingOwnerRepository meetingOwnerRepository;
+  
+  @Autowired
+  private MyPageUtils myPageUtils;
   
   public ResponseEntity<Map<String, Object>> getTagList() {
     return new ResponseEntity<>(Map.of("tagList", tagRepository.findAll()), HttpStatus.OK);
@@ -49,10 +53,19 @@ public class MeetService {
     return new ResponseEntity<>(Map.of("categoryList", categoryList), HttpStatus.OK);
   }
   
+  // 채원 - 모임 데이터 가져오기
   public ResponseEntity<PageDto<MeetingDto>> getMeetingList(Pageable pageable) {
     //Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "meetingNo"));
-    Page<Object[]> results = meetingOwnerRepository.findAllWithParticipants(pageable);
     
+    // 페이지는 0부터 시작이므로 0 이상이면 1빼주기
+    int pageNumber = (pageable.getPageNumber() > 0) ? pageable.getPageNumber() - 1: 0;
+    
+    // 페이지 번호 조정해서 새롭게 생성!
+    Pageable FinalPageable = PageRequest.of(pageNumber, pageable.getPageSize(), Sort.by(Sort.Direction.ASC, "meetingNo"));
+    
+    Page<Object[]> results = meetingOwnerRepository.findAllWithParticipants(FinalPageable);
+    
+    // 리스트 돌면서 participantsCount 설정해주기!
     List<MeetingDto> meetingList = results.get()
         .map(result -> {
             MeetingOwner meetingOwner = (MeetingOwner) result[0];
@@ -65,14 +78,11 @@ public class MeetService {
         })
         .collect(Collectors.toList());
     
-    // PageImpl을 사용하여 Page<MeetingDto> 생성
-    // 1. 페이징 정보 제공
-    // - PageImpl은 현재 페이지의 데이터 리스트, 전체 데이터의 수, 페이지 번호, 페이지 크기 등의 정보를 포함한다.
-    // - 클라이언트는 이 정보를 통해 데이터의 총 개수, 페이지 수, 현재 페이지에 대한 정보를 알 수 있다.
-    // 2. String Data의 표준
-    //Page<MeetingDto> meetingDtoPage = new PageImpl<>(meetingList, pageable, results.getTotalElements());
+    // totalPage, BeginPage 구하기 위한 페이징 세팅
+    myPageUtils.setPaging(results.getTotalElements(), 9, results.getNumber());
     
-    PageDto<MeetingDto> meetingDtoPage = new PageDto<MeetingDto>(meetingList, results.getNumber(), results.getSize(), results.getTotalElements());
+    // PageDto 객체로 반환
+    PageDto<MeetingDto> meetingDtoPage = new PageDto<MeetingDto>(meetingList, results.getNumber(), results.getTotalPages(), myPageUtils.getBeginPage(), myPageUtils.getEndPage());
     
     return ResponseEntity.ok(meetingDtoPage);
 }
