@@ -2,12 +2,20 @@ package com.osundosun.momo.controller;
 
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.osundosun.momo.dto.MeetingDto;
+import com.osundosun.momo.dto.PageDto;
+import com.osundosun.momo.entity.MeetingOwner;
 import com.osundosun.momo.service.MeetService;
 
 @Controller
@@ -55,6 +63,17 @@ public class MeetController {
     return "meeting/meetingInquiry";
   }
   
+  // 카테고리 데이터 가져오기
+  @GetMapping("/getCategory.do")
+  public ResponseEntity<Map<String, Object>> getCategory() {
+    return meetService.getCategory();
+  }
+  
+  @GetMapping("/getMeetingList.do")
+  public ResponseEntity<PageDto<MeetingDto>> getMeetingList(@PageableDefault(size = 9, sort= {"meetingNo"}) Pageable pageable) {
+    // @PageableDefault를 사용해서 
+    return meetService.getMeetingList(pageable);
+  }
  
 }  
   
