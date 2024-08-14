@@ -28,6 +28,17 @@ ul, li {
   list-style: none;
 }
 
+/* 카테고리 - 전체보기 */
+.all-cover {
+  cursor: pointer;
+  text-align: end;
+}
+
+
+.main-category {
+  padding: 0 1rem;
+}
+
 
 
   

@@ -1,6 +1,8 @@
 package com.osundosun.momo;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.AfterEach;
@@ -42,8 +44,12 @@ public class MeetingTest {
   @DisplayName("meeting데이터를 한페이지당 9개씩 가져온다.")
   void getMeetingTest() {
     System.out.println("---시작합니다---");
+    
     Pageable pageable = PageRequest.of(0, 9, Sort.by(Sort.Direction.ASC, "meetingNo"));
     Page<Object[]> results = meetingOwnerRepository.findAllWithParticipants(pageable);
+    
+    // tagNo담아주기 위한 Set 선언
+    Set<Integer> tagNoList = new HashSet<>();
     
     List<MeetingDto> meetingList = results.getContent()
         .stream()
@@ -54,9 +60,17 @@ public class MeetingTest {
             MeetingDto dto = toMeetingDto(meetingOwner);
             dto.setParticipantsCount(participantsCount); // participantsCount 설정
             
+            // 여기서 tagNo값도 split해서 Set에 저장한다. -> 태그 데이터 가져오기위함.
+            String[] tagNum = dto.getTagNo().split(",");
+            for(String tag : tagNum) {
+              tagNoList.add(Integer.parseInt(tag));
+            }
+            
             return dto;
         })
         .collect(Collectors.toList());
+    
+    System.out.println("tagNoList: " + tagNoList);
     
     PageDto<MeetingDto> meetingDtoPage = new PageDto<MeetingDto>(meetingList, results.getNumber(), results.getSize(), results.getTotalElements(), results.getTotalPages());
     System.out.println("---끝났습니다---");

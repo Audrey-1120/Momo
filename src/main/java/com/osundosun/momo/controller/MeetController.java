@@ -70,11 +70,11 @@ public class MeetController {
   }
   
   @GetMapping("/getMeetingList.do")
-  public ResponseEntity<PageDto<MeetingDto>> getMeetingList(@PageableDefault(size = 9, sort= {"meetingNo"}) Pageable pageable) {
-    // @PageableDefault를 사용해서 
-    return meetService.getMeetingList(pageable);
+  public ResponseEntity<Map<String, Object>> getMeetingList(@PageableDefault(size = 9, sort= {"createdDate,DESC"}) Pageable pageable, @RequestParam long cateNo) {
+    // @PageableDefault를 사용해서 page, size, sort 정해주기 
+    return meetService.getMeetingList(pageable, cateNo);
   }
- 
+  
 }  
   
     
