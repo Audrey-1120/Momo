@@ -69,6 +69,7 @@ public class MeetController {
     return meetService.getCategory();
   }
   
+  // 모임 데이터 가져오기
   @GetMapping("/getMeetingList.do")
   public ResponseEntity<Map<String, Object>> getMeetingList(@PageableDefault(size = 9, sort= {"createdDate,DESC"}) Pageable pageable, @RequestParam long cateNo) {
     // @PageableDefault를 사용해서 page, size, sort 정해주기 

@@ -86,7 +86,11 @@ const fnAttachTagNoList = () => {
         $('#personmodal').modal('hide');
 		fnAttachTagNoList();
 		fnCheckTag();
-});
+  });
+  
+  $(document).on('click', '.person-notChoice-btn', function() {
+	fnCheckTag();
+  })
 
 // ------------------------- 닉네임 --------------------------
 
@@ -185,21 +189,28 @@ const fnCheckTag = () => {
 const fnNaverSignup = () => {
   $('#frm-naverSignup').on('submit', (evt) => {
 	
-	// 프로필 이미지 기본인지 변경했는지 체크
-	let profileImageInput = $('#profileImageInput');
-	if(!profileImageInput.files.length) {
-	  profileImageInput.name = "";
-	}
+	fnCheckNickName();
+	fnCheckTag();
+	
+	console.log('회원가입 바로 전 nickNameCheck: ', nickNameCheck);
+	console.log('회원가입 바로 전 tagCheck: ', tagCheck);
 	
 	if(!nickNameCheck) {
-	  evt.preventDefault();
 	  alert('닉네임을 확인해주세요!');
+	  evt.preventDefault();
 	  $('.nickname-input').focus();
 	  return;		
 	} else if(!tagCheck) {
-	  evt.preventDefault();
 	  alert('태그를 확인해주세요!');
+	  evt.preventDefault();
 	  return;
+	}	
+	
+	// 프로필 이미지 기본인지 변경했는지 체크
+	let profileImageInput = $('#profileImageInput');
+	if(!profileImageInput[0].files.length === 0) {
+	  evt.preventDefault();
+	  profileImageInput.attr('name', '');
 	}
 		
   });
@@ -215,4 +226,3 @@ fnPageHeader();
 fnGetTagList();  
 fnNaverSignup();
 fnCheckNickName();
-

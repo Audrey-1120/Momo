@@ -79,6 +79,7 @@ public class MemberController {
     return "redirect:/index.html";
   }
   
+  // 로그아웃
   @GetMapping("/signout.do")
   public void signout(HttpServletRequest request, HttpServletResponse response) {
     memberService.signout(request, response);

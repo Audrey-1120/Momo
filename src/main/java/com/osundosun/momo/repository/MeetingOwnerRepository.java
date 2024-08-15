@@ -17,7 +17,7 @@ public interface MeetingOwnerRepository extends JpaRepository<MeetingOwner, Numb
    @Query("SELECT m, COUNT(p) AS participantsCount FROM MeetingOwner m LEFT JOIN m.participants p ON p.status = 1 GROUP BY m")
    Page<Object[]> findAllWithParticipants(Pageable pageable);
    
-   
+   // 카테고리 별로 조회
    @Query("SELECT m, COUNT(p) AS participantsCount FROM MeetingOwner m LEFT JOIN m.participants p ON p.status = 1 WHERE m.cateNo = :cateNo GROUP BY m")
    Page<Object[]> findAllWithParticipantsByCateNo(Pageable pageable, @Param("cateNo") long CateNo);
    
