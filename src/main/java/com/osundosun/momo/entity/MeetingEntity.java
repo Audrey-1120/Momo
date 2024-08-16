@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "MEETING_T")
-public class MeetingOwner {
+public class MeetingEntity {
 
   // 기본키 <- 이 기본키 타입을 extend 할 때 오른쪽에 써주는 것. 아무거나 채워놓는 부분 아니었음...
   @Id

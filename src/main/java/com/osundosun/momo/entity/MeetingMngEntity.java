@@ -34,7 +34,7 @@ public class MeetingMngEntity {
   
   @ManyToOne
   @JoinColumn(name = "MEETING_NO", nullable = false)
-  private MeetingOwner meeting;
+  private MeetingEntity meeting;
   
   
   

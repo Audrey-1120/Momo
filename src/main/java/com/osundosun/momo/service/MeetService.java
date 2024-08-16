@@ -22,10 +22,10 @@ import com.osundosun.momo.dto.MeetingDto;
 import com.osundosun.momo.dto.PageDto;
 import com.osundosun.momo.dto.TagDto;
 import com.osundosun.momo.entity.CateEntity;
-import com.osundosun.momo.entity.MeetingOwner;
-import com.osundosun.momo.entity.Tag;
+import com.osundosun.momo.entity.MeetingEntity;
+import com.osundosun.momo.entity.TagEntity;
 import com.osundosun.momo.repository.CateRepository;
-import com.osundosun.momo.repository.MeetingOwnerRepository;
+import com.osundosun.momo.repository.MeetingRepository;
 import com.osundosun.momo.repository.TagRepository;
 import com.osundosun.momo.utils.MyPageUtils;
 
@@ -39,7 +39,7 @@ public class MeetService {
   private CateRepository cateRepository;
   
   @Autowired
-  private MeetingOwnerRepository meetingOwnerRepository;
+  private MeetingRepository meetingOwnerRepository;
   
   @Autowired
   private MyPageUtils myPageUtils;
@@ -85,7 +85,7 @@ public class MeetService {
     // 리스트 돌면서 participantsCount 설정해주기!
     List<MeetingDto> meetingList = results.get()
         .map(result -> {
-            MeetingOwner meetingOwner = (MeetingOwner) result[0];
+            MeetingEntity meetingOwner = (MeetingEntity) result[0];
             Long participantsCount = (Long) result[1];
             
             MeetingDto dto = toMeetingDto(meetingOwner);
@@ -112,10 +112,10 @@ public class MeetService {
     
     
     // TagDto 객체로 변환
-    List<Tag> tagBeforeList = tagRepository.findAllByTagNoIn(tagNoList);
+    List<TagEntity> tagBeforeList = tagRepository.findAllByTagNoIn(tagNoList);
     List<TagDto> tagList = new ArrayList<>();
     
-    for(Tag tag: tagBeforeList) {
+    for(TagEntity tag: tagBeforeList) {
       tagList.add(toTagDto(tag));
     }
     
@@ -145,7 +145,7 @@ public class MeetService {
   
   
   // tagDto로 변환
-  private TagDto toTagDto(Tag tag) {
+  private TagDto toTagDto(TagEntity tag) {
     
     TagDto cateDto = TagDto.builder()
                         .tagNo(tag.getTagNo())
@@ -170,7 +170,7 @@ public class MeetService {
   }
   
   // MeetingDto로 변환
-  private MeetingDto toMeetingDto(MeetingOwner meetingOwner) {
+  private MeetingDto toMeetingDto(MeetingEntity meetingOwner) {
     
     MeetingDto meetingDto = MeetingDto.builder()
                                 .meetingNo(meetingOwner.getMeetingNo())

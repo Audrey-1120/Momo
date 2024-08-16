@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.osundosun.momo.dto.MeetingDto;
 import com.osundosun.momo.dto.PageDto;
-import com.osundosun.momo.entity.MeetingOwner;
+import com.osundosun.momo.entity.MeetingEntity;
 import com.osundosun.momo.service.MeetService;
 
 @Controller

@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.osundosun.momo.dto.MeetingDto;
 import com.osundosun.momo.dto.PageDto;
-import com.osundosun.momo.entity.MeetingOwner;
-import com.osundosun.momo.repository.MeetingOwnerRepository;
+import com.osundosun.momo.entity.MeetingEntity;
+import com.osundosun.momo.repository.MeetingRepository;
 import com.osundosun.momo.service.MeetService;
 
 @SpringBootTest
@@ -28,7 +28,7 @@ import com.osundosun.momo.service.MeetService;
 public class MeetingTest {
   
   @Autowired
-  private MeetingOwnerRepository meetingOwnerRepository;
+  private MeetingRepository meetingOwnerRepository;
 
   @BeforeEach
   public void before() {
@@ -54,7 +54,7 @@ public class MeetingTest {
     List<MeetingDto> meetingList = results.getContent()
         .stream()
         .map(result -> {
-            MeetingOwner meetingOwner = (MeetingOwner) result[0];
+            MeetingEntity meetingOwner = (MeetingEntity) result[0];
             Long participantsCount = (Long) result[1];
             
             MeetingDto dto = toMeetingDto(meetingOwner);
@@ -77,7 +77,7 @@ public class MeetingTest {
   }
   
   // MeetingDto로 변환
-  private MeetingDto toMeetingDto(MeetingOwner meetingOwner) {
+  private MeetingDto toMeetingDto(MeetingEntity meetingOwner) {
     MeetingDto meetingDto = new MeetingDto();
     meetingDto.setMeetingNo(meetingOwner.getMeetingNo());
     meetingDto.setMeetingTitle(meetingOwner.getMeetingTitle());
