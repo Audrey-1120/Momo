@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class MemberDto {
-
-  int memberNo, signupKind, role;
-  String email, pw, name, nickName, mobile, gender, profilePath, tagNo;
-  Timestamp signupDate;
+public class MeetingDto {
   
+  int meetingNo;
+  long capacity, leaderNo, cateNo, participantsCount;
+  String meetingTitle, tagNo;
+  Timestamp createdDate;
+
 }

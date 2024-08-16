@@ -1,6 +1,6 @@
 package com.osundosun.momo.dto;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class MemberDto {
-
-  int memberNo, signupKind, role;
-  String email, pw, name, nickName, mobile, gender, profilePath, tagNo;
-  Timestamp signupDate;
+public class PageDto<T> {
+  
+  private List<T> contents;
+  private int currentPage;
+  private long totalPage;
+  private long beginPage;
+  private long endPage;
   
 }

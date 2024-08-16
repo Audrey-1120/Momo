@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class MemberDto {
+public class CateDto {
 
-  int memberNo, signupKind, role;
-  String email, pw, name, nickName, mobile, gender, profilePath, tagNo;
-  Timestamp signupDate;
+  int cateNo, topCate, parentNo;
+  String cateName;
+  Timestamp createdDate;
   
 }

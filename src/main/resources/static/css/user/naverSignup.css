@@ -1,0 +1,56 @@
+  #point{
+   width : 600px;
+  height : 300px;
+  }
+  
+  #point > div {
+   width : 600px;
+  height : 70px;
+  background-color : yellowgreen;
+  }
+  
+  #personal-point {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+    
+  #personal-tag {
+    margin-bottom: 0;
+  }
+
+  #personal-point li {
+    margin: 5px;
+    padding: 10px; 
+    border: 0px; 
+    border-radius: 10px;
+    display: inline-block;
+    background-color: lightgray;
+    color:white;
+    cursor: pointer;
+  }
+  
+  #personal-tag li {
+    margin: 5px;
+    padding: 10px; 
+    border: 0px; 
+    border-radius: 10px;
+    display: inline-block;
+    background-color: yellowgreen;
+    color:white;
+    cursor: pointer;
+  }
+  
+  .selected {
+    background-color: yellowgreen !important;
+    font-weight: bold; /* 글자 두껍게 */
+  }
+  
+  #profileImage,
+  #tag-notice {
+	cursor: pointer;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+  }

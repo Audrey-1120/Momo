@@ -141,8 +141,11 @@
         
         <!-- 로그인 로고(카카오, 네이버) -->
         <div class="login-logo">
-	      <img src="/img/naver-logo.png" class="naver-logo" alt="">
-	      <img src="/img/kakao-logo.png" class="kakao-logo" alt="">
+          <a th:href="${naverLoginURL}">
+            <img src="/img/naver-logo.png" class="naver-logo" alt="">
+          </a>
+	      
+	      <!-- <img src="/img/kakao-logo.png" class="kakao-logo" alt=""> -->
         </div>
 
 		<!-- footer 분리 -->
